@@ -1,7 +1,7 @@
-import { LocaleDto } from '@/dtos/super_admin/locale.dto';
+import { LocaleDto } from '@/dtos/app/locale.dto';
 import { HttpException } from '@exceptions/HttpException';
-import { Locale } from '@/interfaces/super_admin/locale.interface';
-import LocaleModel from '@/models/super_admin/locale.model';
+import { Locale } from '@/interfaces/app/locale.interface';
+import LocaleModel from '@/models/app/locale.model';
 import { isEmpty } from '@utils/util';
 import { Types } from 'mongoose';
 class LocaleService {
@@ -44,7 +44,7 @@ class LocaleService {
     return updateLocaleById;
   }
   // deleted record
-  public async deleteLocale(localeId: number, isActive: number): Promise<Locale> {
+  public async deleteLocale(localeId: string, isActive: number): Promise<Locale> {
     if (!Types.ObjectId.isValid(localeId)) throw new HttpException(400, 'Locale is invalid');
     const deleteLocaleById: Locale = await this.localeModel.findByIdAndUpdate(
       localeId,

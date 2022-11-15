@@ -6,7 +6,7 @@ import UsersRoute from '@/routes/super_admin/users.route';
 import AccountsRoute from '@/routes/super_admin/accounts.route';
 import SuperadminRoute from '@/routes/super_admin/superadmin.route';
 import AccountUserRoute from '@/routes/super_admin/accountUser.route';
-import LocaleRoute from '@/routes/super_admin/locale.route';
+import LocaleRoute from '@/routes/super_admin/Adminlocale.route';
 import RoleRoute from '@/routes/super_admin/roles.route';
 import TeamRoute from '@/routes/app/team.route';
 import TeamMemberRoute from '@/routes/app/teammember.route';
@@ -14,6 +14,7 @@ import validateEnv from '@utils/validateEnv';
 import NoteRoute from './routes/app/notes.route';
 import LabelRoute from './routes/app/label.route';
 import CannedResRoute from './routes/app/canned_res.route';
+import AdminLocaleRoute from '@/routes/super_admin/Adminlocale.route';
 
 validateEnv();
 
@@ -25,7 +26,7 @@ const app = new App([
   new SuperAdminAuth(),
   new SuperadminRoute(),
   new AccountUserRoute(),
-  new LocaleRoute(),
+  new AdminLocaleRoute(),
   new RoleRoute(),
   // App
   new AuthRoute(),

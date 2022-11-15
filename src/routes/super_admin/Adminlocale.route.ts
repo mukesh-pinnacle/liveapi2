@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import LocaleController from '@/controllers/super_admin/locale.controller';
-import { LocaleDto } from '@/dtos/super_admin/locale.dto';
+import LocaleController from '@/controllers/app/locale.controller';
+import { LocaleDto } from '@/dtos/app/locale.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@/middlewares/validation.middleware';
 import superadminAuthMiddleware from '@/middlewares/superadminAuth.middleware';
 
-class LocaleRoute implements Routes {
+class AdminLocaleRoute implements Routes {
   public path = '/super_admin/locale';
   public router: Router = Router();
   public localeController = new LocaleController();
@@ -28,4 +28,4 @@ class LocaleRoute implements Routes {
   }
 }
 
-export default LocaleRoute;
+export default AdminLocaleRoute;
