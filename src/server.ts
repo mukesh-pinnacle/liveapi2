@@ -6,7 +6,7 @@ import UsersRoute from '@/routes/super_admin/users.route';
 import AccountsRoute from '@/routes/super_admin/accounts.route';
 import SuperadminRoute from '@/routes/super_admin/superadmin.route';
 import AccountUserRoute from '@/routes/super_admin/accountUser.route';
-import LocaleRoute from '@/routes/super_admin/Adminlocale.route';
+import LocaleRoute from '@/routes/app/locale.route';
 import RoleRoute from '@/routes/super_admin/roles.route';
 import TeamRoute from '@/routes/app/team.route';
 import TeamMemberRoute from '@/routes/app/teammember.route';
@@ -37,7 +37,7 @@ const app = new App([
   new CannedResRoute(),
   new NoteRoute(),
   new LabelRoute(),
-  //new LocaleRoute(),
+  new LocaleRoute(),
 ]);
 
 app.listen();
