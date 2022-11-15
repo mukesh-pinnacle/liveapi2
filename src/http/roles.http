@@ -1,0 +1,43 @@
+# baseURL
+@baseURL = http://localhost:4230
+
+###
+# Find All Roles
+GET {{ baseURL }}/roles
+
+###
+# Find Role By Id
+GET {{ baseURL }}/roles/1
+
+###
+# Create Role
+POST {{ baseURL }}/roles
+Content-Type: application/json
+
+{
+    "role":"admin"
+}
+
+###
+# Modify Role By Id
+PUT {{ baseURL }}/roles/1
+Content-Type: application/json
+
+{
+    "name": "first role",
+    "privileges": [
+        {
+            "module": "accounts",
+            "actions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ]
+        }
+    ]
+}
+
+###
+# Delete Role By Id
+DELETE {{ baseURL }}/roles/1

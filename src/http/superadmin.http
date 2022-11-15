@@ -1,0 +1,37 @@
+# baseURL
+@baseURL = http://localhost:4230
+
+###
+# Find All Users
+GET {{ baseURL }}/superadmin
+
+###
+# Find User By Id
+GET {{ baseURL }}/superadmin/635a068f019d4824aeb165d9
+
+###
+# Create User
+POST {{ baseURL }}/superadmin
+Content-Type: application/json
+
+{
+    "name":"Sunit Patil",
+    "displayname":"Super Sunit",
+    "email":"sunit.patil@pinnacle.in",
+    "password":"pass123"
+}
+
+
+###
+# Modify User By Id
+PUT {{ baseURL }}/superadmin/635a068f019d4824aeb165d9
+Content-Type: application/json
+{
+    "name": "sami1",
+    "displayname":"Sami3 Agent"
+}
+
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/superadmin/635a068f019d4824aeb165d9/0

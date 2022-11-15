@@ -1,0 +1,37 @@
+# baseURL
+@baseURL = http://localhost:4230
+
+###
+# Find All Users
+GET {{ baseURL }}/users
+
+###
+# Find User By Id
+GET {{ baseURL }}/users/635a068f019d4824aeb165d9
+
+###
+# Create User
+POST {{ baseURL }}/users
+Content-Type: application/json
+
+{
+    "email": "sunitpatil@email.com",
+    "password": "pass123",
+    "name": "Sunit Patil",
+    "displayname":"Sunit Admin"
+}
+
+
+###
+# Modify User By Id
+PUT {{ baseURL }}/users/635a068f019d4824aeb165d9
+Content-Type: application/json
+{
+    "name": "sami1",
+    "displayname":"Sami3 Agent"
+}
+
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/users/635a068f019d4824aeb165d9/0

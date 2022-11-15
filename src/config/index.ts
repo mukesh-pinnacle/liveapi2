@@ -1,0 +1,10 @@
+import { config } from 'dotenv';
+config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
+
+export const CREDENTIALS = process.env.CREDENTIALS === 'true';
+
+// for server
+// export const { NODE_ENV, PORT, DB_HOST, DB_PORT, DB_DATABASE, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN, DB_USERNAME, DB_PASSWORD } = process.env;
+
+// for local
+export const { NODE_ENV, PORT, DB_HOST, DB_PORT, DB_DATABASE, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN } = process.env;

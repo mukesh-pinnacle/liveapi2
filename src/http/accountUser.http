@@ -1,0 +1,36 @@
+# baseURL
+@baseURL = http://localhost:4230
+
+###
+# Find All Users
+GET {{ baseURL }}/accountuser
+
+###
+# Find User By Id
+GET {{ baseURL }}/accountuser/635bb6ffd4e0c17a2c9322d3
+
+###
+# Create User
+POST {{ baseURL }}/
+Content-Type: application/json
+
+{
+    "account_id":"635bb6c3d4e0c17a2c9322cb",
+    "user_id":"635b5c7efbb09392905ce67d",
+    "role":1
+}
+
+
+###
+# Modify User By Id
+PUT {{ baseURL }}/accountuser/635bb6ffd4e0c17a2c9322d3
+Content-Type: application/json
+{
+    "account_id":"635bb6c3d4e0c17a2c9322cb",
+    "user_id":"635b5c7efbb09392905ce67d",
+    "role":2
+}
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/accountuser/635bb6ffd4e0c17a2c9322d3/1
