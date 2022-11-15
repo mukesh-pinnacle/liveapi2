@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
-import { Note } from '@/interfaces/note.interface';
+import { Note } from '@/interfaces/app/note.interface';
 
 
 

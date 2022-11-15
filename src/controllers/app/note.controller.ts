@@ -1,5 +1,5 @@
-import { NoteDto } from "@/dtos/note.dto";
-import { Note } from "@/interfaces/note.interface";
+import { NoteDto } from "@/dtos/app/note.dto";
+import { Note } from "@/interfaces/app/note.interface";
 import NoteService from "@/services/note.service";
 import { NextFunction, Request, Response } from "express";
 class NoteController {

@@ -11,6 +11,9 @@ import RoleRoute from '@/routes/super_admin/roles.route';
 import TeamRoute from '@/routes/app/team.route';
 import TeamMemberRoute from '@/routes/app/teammember.route';
 import validateEnv from '@utils/validateEnv';
+import NoteRoute from './routes/app/notes.route';
+import LabelRoute from './routes/app/label.route';
+import CannedResRoute from './routes/app/canned_res.route';
 
 validateEnv();
 
@@ -28,6 +31,12 @@ const app = new App([
   new AuthRoute(),
   new TeamRoute(),
   new TeamMemberRoute(),
+  new TeamRoute(),
+  new TeamMemberRoute(),
+  new CannedResRoute(),
+  new NoteRoute(),
+  new LabelRoute(),
+  //new LocaleRoute(),
 ]);
 
 app.listen();

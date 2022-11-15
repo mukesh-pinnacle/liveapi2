@@ -1,6 +1,6 @@
 import { model, Schema, Document } from 'mongoose';
-import { Team } from '@interfaces/team.interface';
-import { CannedRes } from '@/interfaces/canned_response';
+//import { Team } from '@interfaces/team.interface';
+import { CannedRes } from '@/interfaces/app/canned_response';
 
 
 

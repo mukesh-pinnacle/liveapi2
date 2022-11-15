@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import LocaleController from '@controllers/locale.controller';
-import { LocaleDto } from '@dtos/locale.dto';
+import LocaleController from '@controllers/app/locale.controller';
+import { LocaleDto } from '@dtos/app/locale.dto';
 import { Routes } from '@interfaces/routes.interface';
-import validationLocalMiddleware from '@middlewares/validate_locale.middleware';
+//import validationLocalMiddleware from '@middlewares/validate_locale.middleware';
 import validationMiddleware from '@/middlewares/validation.middleware';
 import authMiddleware from '@/middlewares/auth.middleware';
 
 
 
 class LocaleRoute implements Routes {
-  public path = '/locale';
+  public path = '/app/locale';
   public router: Router = Router();
   public localeController = new LocaleController();
 

@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
-import { Locale } from '@interfaces/locale.interface';
+import { Locale } from '@interfaces/app/locale.interface';
 
 
 const LocaleSchema: Schema = new Schema({

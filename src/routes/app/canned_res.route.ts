@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import CannedResController from '@controllers/canned_res.controller';
-import { CannedResponsesDto } from '@dtos/CannedResponses.dto';
+import CannedResController from '@controllers/app/canned_res.controller';
+import { CannedResponsesDto } from '@dtos/app/CannedResponses.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware'
 import authMiddleware from '@/middlewares/auth.middleware';
@@ -8,7 +8,7 @@ import authMiddleware from '@/middlewares/auth.middleware';
 
 
 class CannedResRoute implements Routes {
-    public path = '/canned-reponses';
+    public path = '/app/canned-reponses';
     public router: Router = Router();
     public cannedResController = new CannedResController();
 

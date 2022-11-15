@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { CannedResponsesDto } from '@dtos/CannedResponses.dto';
-import { Team } from '@interfaces/team.interface';
+import { CannedResponsesDto } from '@dtos/app/CannedResponses.dto';
+//import { Team } from '@interfaces/team.interface';
 import CannedResService from '@services/canned_responses.service';
-import { CannedRes } from '@/interfaces/canned_response';
+import { CannedRes } from '@/interfaces/app/canned_response';
 
 class CannedResController {
     public cannedResService = new CannedResService();

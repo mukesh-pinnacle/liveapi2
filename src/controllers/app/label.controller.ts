@@ -1,5 +1,5 @@
-import { LabelDto } from "@/dtos/label.dto";
-import { Label } from "@/interfaces/label.interface";
+import { LabelDto } from "@/dtos/app/label.dto";
+import { Label } from "@/interfaces/app/label.interface";
 import LabelService from "@/services/label.service";
 import { NextFunction, Request, Response } from "express";
 class LabelController {

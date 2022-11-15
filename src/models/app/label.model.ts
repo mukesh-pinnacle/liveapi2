@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
-import { Label } from '@/interfaces/label.interface';
+import { Label } from '@/interfaces/app/label.interface';
 
 
 

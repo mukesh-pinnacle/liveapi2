@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 //import { CreateAccountDto } from '@dtos/accounts.dto';
-import { LocaleDto } from '@dtos/locale.dto';
-import { Locale } from '@interfaces/locale.interface';
+import { LocaleDto } from '@dtos/app/locale.dto';
+import { Locale } from '@interfaces/app/locale.interface';
 import LocaleService from '@services/locale.service';
 
 class LocaleController {

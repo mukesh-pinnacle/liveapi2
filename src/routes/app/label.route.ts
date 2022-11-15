@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import LabelController from '@controllers/label.controller';
+import LabelController from '@controllers/app/label.controller';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware'
 import authMiddleware from '@/middlewares/auth.middleware';
-import { LabelDto } from '@/dtos/label.dto';
+import { LabelDto } from '@/dtos/app/label.dto';
 
 
 class LabelRoute implements Routes {
-    public path = '/label';
+    public path = '/app/label';
     public router: Router = Router();
     public labelController = new LabelController();
     constructor() {

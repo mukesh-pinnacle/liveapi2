@@ -1,14 +1,13 @@
 import { Router } from 'express';
-import NoteController from '@controllers/note.controller';
-import { TeamDto } from '@dtos/team.dto';
+import NoteController from '@controllers/app/note.controller';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware'
 import authMiddleware from '@/middlewares/auth.middleware';
-import { NoteDto } from '@/dtos/note.dto';
+import { NoteDto } from '@/dtos/app/note.dto';
 
 
 class NoteRoute implements Routes {
-    public path = '/notes';
+    public path = '/app/notes';
     public router: Router = Router();
     public noteController = new NoteController();
     constructor() {
