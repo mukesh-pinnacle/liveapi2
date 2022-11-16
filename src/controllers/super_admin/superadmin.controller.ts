@@ -24,7 +24,6 @@ class SuperadminController {
     } catch (error) {
       next(error);
     }
-    l;
   };
 
   public createSuperadmin = async (req: Request, res: Response, next: NextFunction) => {

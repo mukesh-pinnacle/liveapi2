@@ -8,6 +8,11 @@ class AccountService {
   public accounts = accountModel;
 
   public async findAllAccount(): Promise<Account[]> {
+    const accounts: Account[] = await this.accounts.find();
+    return accounts;
+  }
+
+  public async findAllAccountUsers(): Promise<Account[]> {
     // const accounts: Account[] = await this.accounts.find();
     const accounts: Account[] = await this.accounts.aggregate([
       {
@@ -39,6 +44,7 @@ class AccountService {
           locale_id: 1,
           lng: 1,
           userCount: 1,
+          limits: 1,
         },
       },
     ]);

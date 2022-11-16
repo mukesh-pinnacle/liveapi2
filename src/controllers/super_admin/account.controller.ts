@@ -7,10 +7,17 @@ class AccountsController {
   public accountService = new accountService();
 
   public getAccounts = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('GetAccounts');
-
     try {
       const findAllAccountsData: Account[] = await this.accountService.findAllAccount();
+
+      res.status(200).json({ data: findAllAccountsData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
+  public getAccountUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllAccountsData: Account[] = await this.accountService.findAllAccountUsers();
 
       res.status(200).json({ data: findAllAccountsData, message: 'findAll' });
     } catch (error) {

@@ -14,6 +14,7 @@ class AccountsRoute implements Routes {
   }
   private initializeRoutes() {
     this.router.get(`${this.path}`, superadminAuthMiddleware, this.accountsController.getAccounts);
+    this.router.get(`${this.path}/users`, superadminAuthMiddleware, this.accountsController.getAccountUsers);
     this.router.get(`${this.path}/:id`, superadminAuthMiddleware, this.accountsController.getAccountById);
     this.router.post(`${this.path}`, validationMiddleware(CreateAccountDto, 'body'), superadminAuthMiddleware, this.accountsController.createAccount);
     this.router.put(
