@@ -15,6 +15,7 @@ import NoteRoute from './routes/app/notes.route';
 import LabelRoute from './routes/app/label.route';
 import CannedResRoute from './routes/app/canned_res.route';
 import AdminLocaleRoute from '@/routes/super_admin/Adminlocale.route';
+import AppAccountsRoute from './routes/app/accounts.route';
 
 validateEnv();
 
@@ -38,6 +39,7 @@ const app = new App([
   new NoteRoute(),
   new LabelRoute(),
   new LocaleRoute(),
+  new AppAccountsRoute()
 ]);
 
 app.listen();

@@ -1,29 +1,33 @@
 # baseURL
-@baseURL = http://localhost:4230
+@baseURL = http://localhost:4230/super_admin
 
 ###
-# Find All Users
+# Find All Accounts
 GET {{ baseURL }}/accounts
 
 ###
-# Find User By Id
+# Find All Accounts with Users
+GET {{ baseURL }}/accounts/user
+
+###
+# Find Accounts By Id
 GET {{ baseURL }}/accounts/635a068f019d4824aeb165d9
 
 ###
-# Create User
+# Create Accounts
 POST {{ baseURL }}/
 Content-Type: application/json
 
 {
-    "email": "sunitpatil@email.com",
-    "password": "pass123",
-    "name": "Sunit Patil",
-    "displayname":"Sunit Admin"
+  "name": "Pinnacle 1",
+  "locale_id": "635f5ac9e0bd3766ca2735f8",
+  "domain": "Pinnacle1.com",
+  "support_email": "supportpinnacle@gmail.com"
 }
 
 
 ###
-# Modify User By Id
+# Modify Accounts By Id
 PUT {{ baseURL }}/accounts/635a068f019d4824aeb165d9
 Content-Type: application/json
 {
@@ -33,5 +37,5 @@ Content-Type: application/json
 
 
 ###
-# Delete User By Id
-DELETE {{ baseURL }}/accounts/635a068f019d4824aeb165d9/0
+# Delete Accounts By Id
+GET {{ baseURL }}/accounts/635a068f019d4824aeb165d9/0

@@ -21,11 +21,11 @@ class LocaleRoute implements Routes {
 
   private initializeRoutes() {
     
-    this.router.get(`${this.path}`, [validationMiddleware(LocaleDto, 'body', true), appMiddleware], this.localeController.getLocale);
-    this.router.get(`${this.path}/:id`, [validationMiddleware(LocaleDto, 'body', true), appMiddleware], this.localeController.getLocaleById);
-    this.router.post(`${this.path}`, validationMiddleware(LocaleDto, 'body'), appMiddleware, this.localeController.createLocale);
-    this.router.put(`${this.path}/:id`, [validationMiddleware(LocaleDto, 'body', true), appMiddleware], this.localeController.updateLocale);
-    this.router.delete(`${this.path}/:id/:isActive`, [validationMiddleware(LocaleDto, 'body', true), appMiddleware], this.localeController.deleteLocale);
+    this.router.get(`${this.path}`, [validationMiddleware(LocaleDto, 'body', true), authMiddleware], this.localeController.getLocale);
+    this.router.get(`${this.path}/:id`, [validationMiddleware(LocaleDto, 'body', true), authMiddleware], this.localeController.getLocaleById);
+   //this.router.post(`${this.path}`, validationMiddleware(LocaleDto, 'body'), authMiddleware, this.localeController.createLocale);
+   // this.router.put(`${this.path}/:id`, [validationMiddleware(LocaleDto, 'body', true), authMiddleware], this.localeController.updateLocale);
+   // this.router.delete(`${this.path}/:id/:isActive`, [validationMiddleware(LocaleDto, 'body', true), authMiddleware], this.localeController.deleteLocale);
   }
 }
 

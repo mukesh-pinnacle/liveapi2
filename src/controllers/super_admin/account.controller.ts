@@ -18,7 +18,6 @@ class AccountsController {
   public getAccountUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllAccountsData: Account[] = await this.accountService.findAllAccountUsers();
-
       res.status(200).json({ data: findAllAccountsData, message: 'findAll' });
     } catch (error) {
       next(error);
