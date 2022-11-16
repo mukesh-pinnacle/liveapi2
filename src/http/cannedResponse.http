@@ -17,7 +17,7 @@ GET {{ baseURL }}/canned-reponses/accounts/{{accountId}}
 
 ###
 # Create Label
-POST {{ baseURL }}/canned-reponses
+POST {{ baseURL }}/accounts/{{accountId}}/canned-reponses
 Content-Type: application/json
 
 {

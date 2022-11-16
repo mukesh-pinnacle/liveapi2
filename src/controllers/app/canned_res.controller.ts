@@ -35,8 +35,9 @@ class CannedResController {
     public createCannedResp = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const cannedData: CannedResponsesDto = req.body;
+            const accountId: string =req.params.accountId;
             console.log("canned Controller ==>", cannedData)
-            const createCannedRespData: CannedRes = await this.cannedResService.createCannedResp(cannedData);
+            const createCannedRespData: CannedRes = await this.cannedResService.createCannedResp(accountId, cannedData);
             res.status(201).json({ data: createCannedRespData, message: 'created', statusCode: 201 });
         } catch (error) {
             next(error);

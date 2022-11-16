@@ -29,10 +29,10 @@ class CannedResService {
   }
 
   //create record
-  public async createCannedResp(cannedData: CannedResponsesDto): Promise<CannedRes> {
-    console.log("canned create Services", cannedData);
+  public async createCannedResp(accountId: Object, cannedData: CannedResponsesDto): Promise<CannedRes> {
     if (isEmpty(cannedData)) throw new HttpException(400, 'Canned Response Data is empty');
-    const findCannedRes: CannedRes = await this.cannedResModel.findOne({ short_code: { $regex: new RegExp(cannedData.short_code, "i") }, account_id: cannedData.account_id });
+    if(accountId!=cannedData.account_id) throw new HttpException(409, 'account id in body is diffrent ');
+    const findCannedRes: CannedRes = await this.cannedResModel.findOne({ short_code: { $regex: new RegExp(cannedData.short_code, "i") }, account_id: accountId });
     if (findCannedRes) throw new HttpException(409, `The short_code :  ${cannedData.short_code}  for account id ${cannedData.account_id} is already exists`);
     const createcannedResData: CannedRes = await this.cannedResModel.create(cannedData);
     return createcannedResData;
