@@ -15,6 +15,15 @@ class UsersController {
       next(error);
     }
   };
+  public getUsersAccounts = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllUsersData: User[] = await this.userService.findAllUserAccounts();
+
+      res.status(200).json({ data: findAllUsersData, message: 'findAll' });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   public getUserById = async (req: Request, res: Response, next: NextFunction) => {
     try {

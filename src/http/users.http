@@ -1,9 +1,15 @@
 # baseURL
-@baseURL = http://localhost:4230
+@baseURL = http://localhost:4230/super_admin
 
 ###
 # Find All Users
 GET {{ baseURL }}/users
+
+
+###
+# Find User with No of Accounts
+
+GET {{ baseURL }}/users/accounts
 
 ###
 # Find User By Id

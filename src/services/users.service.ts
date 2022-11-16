@@ -12,6 +12,30 @@ class UserService {
     const users: User[] = await this.users.find();
     return users;
   }
+  public async findAllUserAccounts(): Promise<User[]> {
+    const users: User[] = await this.users.aggregate([
+      {
+        $lookup: {
+          from: 'accountusers',
+          localField: '_id',
+          foreignField: 'user_id',
+          pipeline: [{ $project: { accountid: '$account_id' } }],
+          as: 'accountCount',
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          email: 1,
+          name: 1,
+          displayname: 1,
+          is_active: 1,
+          accountCount: 1,
+        },
+      },
+    ]);
+    return users;
+  }
 
   public async findUserById(userId: string): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
