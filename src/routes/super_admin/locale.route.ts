@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@/middlewares/validation.middleware';
 import superadminAuthMiddleware from '@/middlewares/superadminAuth.middleware';
 
-class AdminLocaleRoute implements Routes {
+class LocaleRoute implements Routes {
   public path = '/super_admin/locale';
   public router: Router = Router();
   public localeController = new LocaleController();
@@ -28,4 +28,4 @@ class AdminLocaleRoute implements Routes {
   }
 }
 
-export default AdminLocaleRoute;
+export default LocaleRoute;

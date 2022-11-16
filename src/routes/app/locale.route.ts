@@ -9,7 +9,7 @@ import appMiddleware from '@/middlewares/app.middleware';
 
 
 
-class LocaleRoute implements Routes {
+class AppLocaleRoute implements Routes {
   public path = '/app/locale';
   public router: Router = Router();
   public localeController = new LocaleController();
@@ -29,4 +29,4 @@ class LocaleRoute implements Routes {
   }
 }
 
-export default LocaleRoute;
+export default AppLocaleRoute;

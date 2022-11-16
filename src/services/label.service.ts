@@ -9,10 +9,12 @@ import { Types } from "mongoose";
 class LabelService {
     public labelModel = LabelModel;
     //create record
-    public async createLabel(labelData: LabelDto): Promise<Label> {
-        console.log("Label Services", labelData);
+    public async createLabel(accountid: string, labelData: LabelDto): Promise<Label> {
+       console.log("Label Services", accountid);
+       if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
         if (isEmpty(labelData)) throw new HttpException(400, 'Label Data is empty');
-        const findLabel: Label = await this.labelModel.findOne({ title: { $regex: new RegExp(labelData.title, "i") }, account_id: labelData.account_id});
+        const findLabel: Label = await this.labelModel.findOne( {$and:[{ title: { $regex: new RegExp(labelData.title, "i") }, account_id: accountid}]} );
+            
         if (findLabel) throw new HttpException(409, `The Label : ${labelData.title}  for account ${labelData.account_id} is already exists`);
         const createLabelData: Label = await this.labelModel.create(labelData);
         return createLabelData;
@@ -37,24 +39,23 @@ class LabelService {
     };
     
     //update record
-    public async updateLabel(id: string, labelData: LabelDto): Promise<Label> {
+    public async updateLabel(accountId: string, id: string, labelData: LabelDto): Promise<Label> {
         if (isEmpty(labelData)) throw new HttpException(400, 'Label Data is empty');
+        if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
         if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Label ID is invalid');
        // console.log('inside Label Update service===', id);
-        if (id) {
-            const findLabel: Label = await this.labelModel.findOne({ title: labelData.title });
-            if (findLabel && findLabel._id != id) throw new HttpException(409, `The Label  ${labelData.title} already exists`);
-            // find other notes id which have content
-        }
-        const updateLabelById: Label = await this.labelModel.findByIdAndUpdate(id, { $set: labelData, updated_at: Date.now() }, { new: true, runValidators: true });
-        console.log(updateLabelById);
+
+       const findLabel: Label = await this.labelModel.findOne( {$and:[{ title: { $regex: new RegExp(labelData.title, "i") }, account_id: accountId}]} );    
+        if (findLabel) throw new HttpException(409, `The Label : ${labelData.title}  for account ${labelData.account_id} is already exists`);
+         const updateLabelById: Label = await this.labelModel.findByIdAndUpdate(id, { $set: labelData, updated_at: Date.now() }, { new: true, runValidators: true });
+       // console.log(updateLabelById);
         if (!updateLabelById) throw new HttpException(409, "Label doesn't exist");
         return updateLabelById;
+        
     }
     // deleted record
-    public async deleteLabel(Id: string): Promise<Label> {
-        console.log(Id);
-        const deleteNoteById: Label = await this.labelModel.findByIdAndDelete({ _id: Id },  { new: true, runValidators: true });
+    public async deleteLabel(accountId:string, Id: string): Promise<Label> {
+        const deleteNoteById: Label = await this.labelModel.findOneAndDelete({$and:[{_id:Id},{account_id:accountId}]});
         //findOneAndDelete(localeId);
         if (!deleteNoteById) throw new HttpException(409, "Label doesn't exist");
         return deleteNoteById;

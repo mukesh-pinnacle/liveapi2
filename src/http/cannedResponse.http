@@ -1,0 +1,46 @@
+# baseURL
+
+@baseURL = http://localhost:4230/app
+
+###
+# Find single Label by account id and Label ID
+@accountId=635ba6239bffd21b730cef16
+@shortcode=good
+GET {{ baseURL }}/canned-reponses/accounts/{{accountId}}/shortcode/{{shortcode}}
+
+
+###
+# Find all canned-responses by account id
+
+GET {{ baseURL }}/canned-reponses/accounts/{{accountId}}
+
+
+###
+# Create Label
+POST {{ baseURL }}/canned-reponses
+Content-Type: application/json
+
+{
+    "account_id":"635ba6239bffd21b730cef16",
+    "short_code":"goodmorning",
+    "content":"Good_Morning Mukesh "
+}
+
+###
+# Modify Canned Response By Id
+@_id=635f6243c8f7ea986b9d6a2b
+PUT {{ baseURL }}/accounts/{{accountId}}/canned-reponses/{{_id}}
+Content-Type: application/json
+
+{
+    "account_id":"635ba6239bffd21b730cef13",
+    "title":"  123",
+    "description":"cardio",
+    "color" : "#ff0011",
+    "show_on_sid":false
+}
+
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}accounts/{{accountId}}/canned-reponses/{{_id}}

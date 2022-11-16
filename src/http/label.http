@@ -1,0 +1,41 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+###
+# Find single Label by account id and Label ID
+GET {{ baseURL }}/accounts/635ba6239bffd21b730cef13/label/63721869cb112ae3d5dd50d4
+
+
+###
+# Find all Label by account id
+
+GET {{ baseURL }}/accounts/635ba6239bffd21b730cef13/label
+
+###
+# Create Label
+POST {{ baseURL }}/accounts/635ba6239bffd21b730cef13/label
+Content-Type: application/json
+
+{   
+    "account_id":"635ba6239bffd21b730cef13",
+    "title":" rockstart",
+    "description":"cardio",
+    "color" : "#ff0000",
+    "show_on_sid":true
+}
+
+###
+# Modify Label By Id
+PUT {{ baseURL }}/accounts/635ba6239bffd21b730cef13/label/6374c71dc48a006d75f43e7d
+Content-Type: application/json
+
+{
+    "title":"simplexyz",
+    "description":"cardio",
+    "color" : "#ff0011",
+    "show_on_sid":false
+}
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/accounts/635ba6239bffd21b730cef13/label/6374c71dc48a006d75f43e7d

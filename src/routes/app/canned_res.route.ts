@@ -8,7 +8,7 @@ import authMiddleware from '@/middlewares/auth.middleware';
 
 
 class CannedResRoute implements Routes {
-    public path = '/app/canned-reponses';
+    public path = '/app';
     public router: Router = Router();
     public cannedResController = new CannedResController();
 
@@ -17,11 +17,11 @@ class CannedResRoute implements Routes {
     }
 
     private initializeRoutes() {
-        this.router.get(`${this.path}/:accountId`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedResByAcID);
-        this.router.get(`${this.path}/:accountId/:shortcode`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedRespByShort_code);
-        this.router.post(`${this.path}`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.createCannedResp);
-         this.router.put(`${this.path}/:accountId/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.updateCannedResp);
-        this.router.delete(`${this.path}/:accountId/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.deleteCannedRes);
+        this.router.get(`${this.path}/canned-reponses/accounts/:accountId`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedResByAcID);
+        this.router.get(`${this.path}/canned-reponses/accounts/:accountId/shortcode/:shortcode`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedRespByShort_code);
+        this.router.post(`${this.path}/canned-reponses`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.createCannedResp);
+         this.router.put(`${this.path}/accounts/:accountId/canned-reponses/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.updateCannedResp);
+        this.router.delete(`${this.path}/accounts/:accountId/canned-reponses/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.deleteCannedRes);
     }
 }
 
