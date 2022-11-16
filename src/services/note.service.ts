@@ -9,10 +9,11 @@ import { Types } from "mongoose";
 class NoteService {
     public noteModel = NoteModel;
     //create record
-    public async createNote(NoteData: NoteDto): Promise<Note> {
+    public async createNote(accountId:Object, NoteData: NoteDto): Promise<Note> {
         console.log("Team Services", NoteData);
         if (isEmpty(NoteData)) throw new HttpException(400, 'Note Data is empty');
-        const findnote: Note = await this.noteModel.findOne({ content: { $regex: new RegExp(NoteData.content, "i") }, account_id: NoteData.account_id, user_id: NoteData.user_id });
+        if(accountId!=NoteData.account_id) throw new HttpException(409, 'account id in body is diffrent ');
+        const findnote: Note = await this.noteModel.findOne({ content: { $regex: new RegExp(NoteData.content, "i") }, account_id: accountId, user_id: NoteData.user_id });
         if (findnote) throw new HttpException(409, `The Note : ${NoteData.content}  for account ${NoteData.user_id} is already exists`);
         const createNoteData: Note = await this.noteModel.create(NoteData);
         return createNoteData;

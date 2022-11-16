@@ -8,7 +8,8 @@ class NoteController {
     public createNote = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const noteData: NoteDto = req.body;
-            const createNoteData: Note = await this.noteService.createNote(noteData);
+            const accountId: string =req.params.accountid;
+            const createNoteData: Note = await this.noteService.createNote(accountId,noteData);
             res.status(201).json({ data: createNoteData, message: 'created', statusCode: 201 });
         } catch (error) {
             next(error);
