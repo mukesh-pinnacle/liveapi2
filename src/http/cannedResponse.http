@@ -21,7 +21,6 @@ POST {{ baseURL }}/accounts/{{accountId}}/canned-reponses
 Content-Type: application/json
 
 {
-    "account_id":"635ba6239bffd21b730cef16",
     "short_code":"goodmorning",
     "content":"Good_Morning Mukesh "
 }
