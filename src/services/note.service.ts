@@ -33,23 +33,25 @@ class NoteService {
     };
     // update Note
     //update record
-    public async updateNote(id: string, noteData: NoteDto): Promise<Note> {
+    public async updateNote(accountId: string, id: string, noteData: NoteDto): Promise<Note> {
         if (isEmpty(noteData)) throw new HttpException(400, 'Note Data is empty');
         if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Note ID is invalid');
+        if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account id is invalid');
         console.log('inside Note Update service===', id);
         if (id) {
-            const findNote: Note = await this.noteModel.findOne({ content: noteData.content });
+            const findNote: Note = await this.noteModel.findOne({ content: noteData.content },{account_id:accountId});
             if (findNote && findNote._id != id) throw new HttpException(409, `This  ${noteData.content} already exists`);
             // find other notes id which have content
         }
         const updateNoteById: Note = await this.noteModel.findByIdAndUpdate(id, { $set: noteData, updated_at: Date.now() }, { new: true, runValidators: true });
-        console.log(updateNoteById);
+       // console.log(updateNoteById);
         if (!updateNoteById) throw new HttpException(409, "Note doesn't exist");
         return updateNoteById;
     }
     // deleted record
-    public async deleteNote(Id: string): Promise<Note> {
-        console.log(Id);
+    public async deleteNote(accountId:string, Id: string): Promise<Note> {
+        if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account id is invalid');
+        if (!Types.ObjectId.isValid(Id)) throw new HttpException(400, 'Note id is invalid');
         const deleteNoteById: Note = await this.noteModel.findByIdAndDelete({ _id: Id },  { new: true, runValidators: true });
         //findOneAndDelete(localeId);
         if (!deleteNoteById) throw new HttpException(409, "Notes doesn't exist");

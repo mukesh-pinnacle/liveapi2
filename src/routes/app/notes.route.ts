@@ -16,8 +16,8 @@ class NoteRoute implements Routes {
     private initializeRoutes() {
         this.router.post(`${this.path}/accounts/:accountid/notes`, [validationMiddleware(NoteDto, 'body', true), authMiddleware], this.noteController.createNote);
         this.router.get(`${this.path}/accounts/:accountid/user/:userid/contactid/:contactid`, [validationMiddleware(NoteDto, 'body', true), authMiddleware], this.noteController.getNotes);
-        this.router.put(`${this.path}/:id`, [validationMiddleware(NoteDto, 'body', true), authMiddleware], this.noteController.updateNote);
-        this.router.delete(`${this.path}/:id`, [validationMiddleware(NoteDto, 'body', true), authMiddleware], this.noteController.deleteNote);
+        this.router.put(`${this.path}/accounts/:accountid/notes/:id`, [validationMiddleware(NoteDto, 'body', true), authMiddleware], this.noteController.updateNote);
+        this.router.delete(`${this.path}/accounts/:accountid/notes/:id`, [validationMiddleware(NoteDto, 'body', true), authMiddleware], this.noteController.deleteNote);
     }
 }
 

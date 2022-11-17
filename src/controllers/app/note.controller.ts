@@ -32,7 +32,8 @@ class NoteController {
         try {
             const id: string = req.params.id;
             const noteData: NoteDto = req.body;
-            const updateNotes: Note = await this.noteService.updateNote(id, noteData);
+            const accountId: string = req.params.accountid;
+            const updateNotes: Note = await this.noteService.updateNote(accountId, id, noteData);
             res.status(200).json({ data: updateNotes, message: 'UpdateNotes', statusCode: 200 });
 
         } catch (error) {
@@ -43,7 +44,8 @@ class NoteController {
     public deleteNote = async (req: Request, res: Response, next: NextFunction) => {
         try {
           const Id: string = req.params.id;
-          const deleteNoteData: Note = await this.noteService.deleteNote(Id);
+          const accountId: string = req.params.accountid;
+          const deleteNoteData: Note = await this.noteService.deleteNote(accountId, Id);
           console.log(Id);
           res.status(200).json({ data: deleteNoteData, message: 'delete Note', statusCode: 200 });
         } catch (error) {
