@@ -1,3 +1,4 @@
+import LabelController from "@/controllers/app/label.controller";
 import { LabelDto } from "@/dtos/app/label.dto";
 import { HttpException } from "@/exceptions/HttpException";
 import { Label } from "@/interfaces/app/label.interface";
@@ -10,17 +11,24 @@ class LabelService {
     public labelModel = LabelModel;
     //create record
     public async createLabel(accountid: string, labelData: LabelDto): Promise<Label> {
-       console.log("Label Services", accountid);
-       if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
+        console.log("Label Services", accountid);
+        if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
         if (isEmpty(labelData)) throw new HttpException(400, 'Label Data is empty');
-        const findLabel: Label = await this.labelModel.findOne( {$and:[{ title: { $regex: new RegExp(labelData.title, "i") }, account_id: accountid}]} );
-            
+        const findLabel: Label = await this.labelModel.findOne({ $and: [{ title: { $regex: new RegExp(labelData.title, "i") }, account_id: accountid }] });
+
         if (findLabel) throw new HttpException(409, `The Label : ${labelData.title}  for account ${labelData.account_id} is already exists`);
-        const createLabelData: Label = await this.labelModel.create(labelData);
+        const createData = {
+            "account_id": accountid,
+            "title": labelData.title,
+            "description": labelData.description,
+            "color": labelData.color,
+            "show_on_sid": labelData.show_on_sid
+        };
+        const createLabelData: Label = await this.labelModel.create(createData);
         return createLabelData;
     };
     //get Notes
-    public async findLabel(accountid: string, id: string, ): Promise<Label[]> {
+    public async findLabel(accountid: string, id: string,): Promise<Label[]> {
         if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
         if (isEmpty(id)) throw new HttpException(400, 'User Id is empty');
         if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account Id is invalid');
@@ -37,25 +45,29 @@ class LabelService {
         if (!findLabelByAccountid) throw new HttpException(409, "Label not available");
         return findLabelByAccountid;
     };
-    
+
     //update record
     public async updateLabel(accountId: string, id: string, labelData: LabelDto): Promise<Label> {
         if (isEmpty(labelData)) throw new HttpException(400, 'Label Data is empty');
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
         if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Label ID is invalid');
-       // console.log('inside Label Update service===', id);
+        // console.log('inside Label Update service===', id);
 
-       const findLabel: Label = await this.labelModel.findOne( {$and:[{ title: { $regex: new RegExp(labelData.title, "i") }, account_id: accountId}]} );    
+        const findLabel: Label = await this.labelModel.findOne({ $and: [{ title: { $regex: new RegExp(labelData.title, "i") }, account_id: accountId }] });
         if (findLabel) throw new HttpException(409, `The Label : ${labelData.title}  for account ${labelData.account_id} is already exists`);
-         const updateLabelById: Label = await this.labelModel.findByIdAndUpdate(id, { $set: labelData, updated_at: Date.now() }, { new: true, runValidators: true });
-       // console.log(updateLabelById);
+        const updateLabelById: Label = await this.labelModel.findByIdAndUpdate(id, { $set: labelData, updated_at: Date.now() }, { new: true, runValidators: true });
+        // console.log(updateLabelById);
+        this.labelModel.findOneAndUpdate({_id:id, account_id:accountId },
+            { $set: { title : labelData.title,description: labelData.description, color: labelData.color, show_on_sid: labelData.show_on_sid, updated_at: Date.now() } },
+            { new: true, runValidators: true }
+          );
         if (!updateLabelById) throw new HttpException(409, "Label doesn't exist");
         return updateLabelById;
-        
+
     }
     // deleted record
-    public async deleteLabel(accountId:string, Id: string): Promise<Label> {
-        const deleteNoteById: Label = await this.labelModel.findOneAndDelete({$and:[{_id:Id},{account_id:accountId}]});
+    public async deleteLabel(accountId: string, Id: string): Promise<Label> {
+        const deleteNoteById: Label = await this.labelModel.findOneAndDelete({ $and: [{ _id: Id }, { account_id: accountId }] });
         //findOneAndDelete(localeId);
         if (!deleteNoteById) throw new HttpException(409, "Label doesn't exist");
         return deleteNoteById;

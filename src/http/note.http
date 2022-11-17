@@ -1,0 +1,39 @@
+# baseURL
+
+@baseURL = http://localhost:4230/app
+
+###
+# Find nptes by account id by user id and contact id
+@accountId=635f292202093e73c774b1a4
+@userId=635f6365c8f7ea986b9d6a35
+@contactid=635f6365c8f7ea986b9d6a37
+GET {{ baseURL }}/accounts/{{accountId}}/user/{{userId}}/contactid/{{contactid}}
+
+
+###
+# Create notes
+POST {{ baseURL }}/accounts/{{accountId}}/notes
+Content-Type: application/json
+
+{
+    "user_id":"635f6365c8f7ea986b9d6a35",
+    "contact_id":"635f6365c8f7ea986b9d6a37",
+    "content":"this is note 6"
+}
+
+###
+# Modify Canned Response By Id
+@_id=6374e003c0f0e49fab127f5e   
+PUT {{ baseURL }}/accounts/{{accountId}}/notes/{{_id}}
+Content-Type: application/json
+
+{
+    "user_id":"635f6365c8f7ea986b9d6a35",
+    "contact_id":"635f6365c8f7ea986b9d6a37",
+    "content":"this is note 5 with Update 5"
+}
+
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/accounts/{{accountId}}/notes/{{_id}}

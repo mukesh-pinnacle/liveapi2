@@ -9,13 +9,19 @@ import { Types } from "mongoose";
 class NoteService {
     public noteModel = NoteModel;
     //create record
-    public async createNote(accountId:Object, NoteData: NoteDto): Promise<Note> {
+    public async createNote(accountId: Object, NoteData: NoteDto): Promise<Note> {
         console.log("Team Services", NoteData);
         if (isEmpty(NoteData)) throw new HttpException(400, 'Note Data is empty');
-        if(accountId!=NoteData.account_id) throw new HttpException(409, 'account id in body is diffrent ');
+       // if (accountId != NoteData.account_id) throw new HttpException(409, 'account id in body is diffrent ');
         const findnote: Note = await this.noteModel.findOne({ content: { $regex: new RegExp(NoteData.content, "i") }, account_id: accountId, user_id: NoteData.user_id });
         if (findnote) throw new HttpException(409, `The Note : ${NoteData.content}  for account ${NoteData.user_id} is already exists`);
-        const createNoteData: Note = await this.noteModel.create(NoteData);
+        const createData = {
+            "account_id": accountId,
+            "user_id": NoteData.user_id,
+            "contact_id": NoteData.contact_id,
+            "content": NoteData.content
+        }
+        const createNoteData: Note = await this.noteModel.create(createData);
         return createNoteData;
     };
     //get Notes
@@ -39,20 +45,20 @@ class NoteService {
         if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account id is invalid');
         console.log('inside Note Update service===', id);
         if (id) {
-            const findNote: Note = await this.noteModel.findOne({ content: noteData.content },{account_id:accountId});
+            const findNote: Note = await this.noteModel.findOne({ content: noteData.content }, { contact_id: noteData.contact_id });
             if (findNote && findNote._id != id) throw new HttpException(409, `This  ${noteData.content} already exists`);
             // find other notes id which have content
         }
-        const updateNoteById: Note = await this.noteModel.findByIdAndUpdate(id, { $set: noteData, updated_at: Date.now() }, { new: true, runValidators: true });
-       // console.log(updateNoteById);
+        const updateNoteById: Note = await this.noteModel.findOneAndUpdate({_id:id, account_id: accountId, contact_id: noteData.contact_id },{ $set: { content: noteData.content, updated_at: Date.now() } }, { new: true, runValidators: true });
+        // console.log(updateNoteById);
         if (!updateNoteById) throw new HttpException(409, "Note doesn't exist");
         return updateNoteById;
     }
     // deleted record
-    public async deleteNote(accountId:string, Id: string): Promise<Note> {
+    public async deleteNote(accountId: string, Id: string): Promise<Note> {
         if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account id is invalid');
         if (!Types.ObjectId.isValid(Id)) throw new HttpException(400, 'Note id is invalid');
-        const deleteNoteById: Note = await this.noteModel.findByIdAndDelete({ _id: Id },  { new: true, runValidators: true });
+        const deleteNoteById: Note = await this.noteModel.findByIdAndDelete({ _id: Id }, { new: true, runValidators: true });
         //findOneAndDelete(localeId);
         if (!deleteNoteById) throw new HttpException(409, "Notes doesn't exist");
         return deleteNoteById;

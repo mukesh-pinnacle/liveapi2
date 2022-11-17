@@ -31,10 +31,15 @@ class CannedResService {
   //create record
   public async createCannedResp(accountId: Object, cannedData: CannedResponsesDto): Promise<CannedRes> {
     if (isEmpty(cannedData)) throw new HttpException(400, 'Canned Response Data is empty');
-    if(accountId!=cannedData.account_id) throw new HttpException(409, 'account id in body is diffrent ');
+    //if(accountId!=cannedData.account_id) throw new HttpException(409, 'account id in body is diffrent ');
     const findCannedRes: CannedRes = await this.cannedResModel.findOne({ short_code: { $regex: new RegExp(cannedData.short_code, "i") }, account_id: accountId });
     if (findCannedRes) throw new HttpException(409, `The short_code :  ${cannedData.short_code}  for account id ${cannedData.account_id} is already exists`);
-    const createcannedResData: CannedRes = await this.cannedResModel.create(cannedData);
+    const createData={
+        "account_id":accountId,
+        "short_code":cannedData.short_code,
+        "content":cannedData.content
+    };
+    const createcannedResData: CannedRes = await this.cannedResModel.create(createData);
     return createcannedResData;
   }
   //update record

@@ -33,11 +33,8 @@ PUT {{ baseURL }}/accounts/{{accountId}}/canned-reponses/{{_id}}
 Content-Type: application/json
 
 {
-    "account_id":"635ba6239bffd21b730cef13",
-    "title":"  123",
-    "description":"cardio",
-    "color" : "#ff0011",
-    "show_on_sid":false
+    "short_code":"abc",
+    "content":"Good_Morning Mukesh "
 }
 
 
