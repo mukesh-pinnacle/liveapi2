@@ -14,7 +14,7 @@ class CustomAttributeService {
     public async createCustomAttribute(accountId: string, customAtttributeData: CustomAttributeDto): Promise<CustomAttribute> {
         console.log("Custom Attribute Services", accountId);
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
-        if (isEmpty(customAtttributeData)) throw new HttpException(400, 'Label Data is empty');
+        if (isEmpty(customAtttributeData)) throw new HttpException(400, 'Custom Attribute Data is empty');
         const findcustomAttribute: CustomAttribute = await this.customAttribute.findOne({ $and: [{ display_name: { $regex: new RegExp(customAtttributeData.display_name, "i") }, account_id: accountId }] });
         //console.log("service ==  > ",findcustomAttribute);
         if (findcustomAttribute) throw new HttpException(409, `The Custom Attribute : ${customAtttributeData.display_name}  for account ${accountId} is already exists`);

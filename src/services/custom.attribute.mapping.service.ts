@@ -1,9 +1,8 @@
-import LabelController from "@/controllers/app/label.controller";
-import { CustomAttributeDto } from "@/dtos/app/custom_attribute.dto";
-import { LabelDto } from "@/dtos/app/label.dto";
+
+import { CustomAttributeMappingDto } from "@/dtos/app/custom_attributeMapping.dto";
 import { HttpException } from "@/exceptions/HttpException";
 import { CustomAttribute } from "@/interfaces/app/custom.attribute.interface";
-import { Label } from "@/interfaces/app/label.interface";
+import { CustomAttributeMapping } from "@/interfaces/app/custom.attribute.Mapping.interface";
 import CustomAttributeMappingModel from "@/models/app/custom.atrribute.mapping.model";
 import { isEmpty } from "@/utils/util";
 import { Types } from "mongoose";
@@ -11,21 +10,16 @@ import { Types } from "mongoose";
 class CustomAttributeMappingService {
     public customAttributeMapping = CustomAttributeMappingModel;
     //create record
-    public async createLabel(accountId: string, customAtttributeData: CustomAttributeDto): Promise<CustomAttribute> {
-        console.log("Custom Attribute Services", accountId);
+    public async createMapping(accountId: string, customAtttributeMapData: CustomAttributeMappingDto): Promise<CustomAttributeMapping> {
+        console.log("Custom Attribute Mapping Services", accountId);
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
-        if (isEmpty(customAtttributeData)) throw new HttpException(400, 'Label Data is empty');
+        if (isEmpty(customAtttributeMapData)) throw new HttpException(400, 'Custom Attribute Mapping is empty');
         const findcustomAttribute: CustomAttribute = await this.customAttributeMapping.findOne({ $and: [{ display_name: { $regex: new RegExp(customAtttributeData.display_name, "i") }, account_id: accountId }] });
         //console.log("service ==  > ",findcustomAttribute);
         if (findcustomAttribute) throw new HttpException(409, `The Custom Attribute : ${customAtttributeData.display_name}  for account ${accountId} is already exists`);
         const createData = {
             "account_id": accountId,
-            "display_name": customAtttributeData.display_name,
-            "key": customAtttributeData.key,
-            "display_type": customAtttributeData.display_type,
-            "mode": customAtttributeData.mode,
-            "description": customAtttributeData.description,
-            "is_active": 1
+            
         };
         const getCustomAttributeData: CustomAttribute = await this.customAttributeMapping.create(createData);
         return getCustomAttributeData;
@@ -68,7 +62,7 @@ class CustomAttributeMappingService {
     //         }},
     //         { new : true, runValidators: true}
     //         );
-    
+
     //     //console.log(updateCustomAttributeData);
     //     return updateCustomAttributeData;
     // }

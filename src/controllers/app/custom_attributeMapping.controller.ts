@@ -1,5 +1,5 @@
 import { CustomAttributeMappingDto } from "@/dtos/app/custom_attributeMapping.dto";
-import { CustomAttribute } from "@/interfaces/app/custom.attribute.interface";
+import { CustomAttributeMapping } from "@/interfaces/app/custom.attribute.Mapping.interface";
 import CustomAttributeMappingService from "@/services/custom.attribute.mapping.service";
 import { NextFunction, Request, Response } from "express";
 import { stringify } from "querystring";
@@ -10,8 +10,8 @@ class CustomAttributeMappingController {
         try {
             const customAtttrMappData: CustomAttributeMappingDto = req.body;
             const accountId: string =req.params.accountid;
-            const createCustomAttributeData: CustomAttribute = await this.customAttributeMappingService.createLabel(accountId, customAtttrMappData);
-            res.status(201).json({ data: createCustomAttributeData, message: 'Custom Attribute created', statusCode: 201 });
+            const createCustomAttributeMap: CustomAttributeMapping = await this.customAttributeMappingService.createMapping(accountId, customAtttrMappData);
+            res.status(201).json({ data: createCustomAttributeMap, message: 'Custom Attribute Mapping created', statusCode: 201 });
         } catch (error) {
             next(error);
         }
