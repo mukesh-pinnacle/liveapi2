@@ -45,7 +45,7 @@ class CustomAttributeController {
         try {
             const id: string = req.params.id;
             const accountId: string =req.params.accountid;
-            const customAtttributeData: CustomAttribute = req.body;
+            const customAtttributeData: CustomAttributeDto = req.body;
             const updateCustomAttribute: CustomAttribute = await this.customAttributeService.updateCustomAttribute(accountId, id, customAtttributeData);
             res.status(200).json({ data: updateCustomAttribute, message: 'Update Custom Attribute', statusCode: 200 });
 
@@ -53,18 +53,18 @@ class CustomAttributeController {
             next(error);
         }
     }
-    // // delete Label By Object ID
-    // public delete = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //       const Id: string = req.params.id;
-    //       const accountId:string=req.params.accountid;
-    //       const deleteNoteData: Label = await this.labelService.deleteLabel(accountId,Id);
-    //       console.log(Id);
-    //       res.status(200).json({ data: deleteNoteData, message: 'deleteLabel', statusCode: 200 });
-    //     } catch (error) {
-    //       next(error);
-    //     }
-    //   };
+    // delete Label By Object ID
+    public deleteCustomAttribute = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          const Id: string = req.params.id;
+          const accountId:string=req.params.accountid;
+          const deleteNoteData: CustomAttribute = await this.customAttributeService.deleteCustomAttribute(accountId,Id);
+          console.log(Id);
+          res.status(200).json({ data: deleteNoteData, message: 'deleteLabel', statusCode: 200 });
+        } catch (error) {
+          next(error);
+        }
+      };
 
 }
 export default CustomAttributeController;

@@ -17,7 +17,7 @@ class CustomRoute implements Routes {
         this.router.get(`${this.path}/accounts/:accountid/custom-attribute`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeController.getCustomAttributByAccountId);
          this.router.get(`${this.path}/accounts/:accountid/custom-attribute/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeController.getCustomAttributById);
         this.router.put(`${this.path}/accounts/:accountid/custom-attribute/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeController.updateCustomAttribute);
-        // this.router.delete(`${this.path}/accounts/:accountid/label/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeController.delete);
+        this.router.delete(`${this.path}/accounts/:accountid/custom-attribute/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeController.deleteCustomAttribute);
     }
 }
 

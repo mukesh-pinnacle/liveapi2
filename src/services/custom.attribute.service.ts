@@ -54,27 +54,36 @@ class CustomAttributeService {
         if (isEmpty(customAtttributeData)) throw new HttpException(400, 'custom Attribute update Data is empty');
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
         if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Custom attribute object ID is invalid');
-        // console.log('inside Label Update service===', id);
-
-        const findCustomAttribut: Label = await this.customAttribute.findOne({ $and: [{ display_name: { $regex: new RegExp(customAtttributeData.display_name, "i") },key:{ $regex: new RegExp(customAtttributeData.key, "i") }, account_id: accountId }] });
-        if (findCustomAttribut) throw new HttpException(409, `The Cutstom Attribute : ${customAtttributeData.display_name}  for account ${customAtttributeData.account_id} is already exists`);
-        const updateLabelById: Label = await this.customAttribute.findByIdAndUpdate(id, { $set: customAtttributeData, updated_at: Date.now() }, { new: true, runValidators: true });
-        // console.log(updateLabelById);
-        this.customAttribute.findOneAndUpdate({_id:id, account_id:accountId },
-            { $set: { title : labelData.title,description: labelData.description, color: labelData.color, show_on_sid: labelData.show_on_sid, updated_at: Date.now() } },
-            { new: true, runValidators: true }
-          );
-        if (!updateLabelById) throw new HttpException(409, "Label doesn't exist");
-        return updateLabelById;
-
+       const findOneCustomAttribute: CustomAttribute = await this.customAttribute.findOne({ display_name: { $regex: new RegExp(customAtttributeData.display_name, "i") },account_id: accountId });
+        if(findOneCustomAttribute.display_name==customAtttributeData.display_name)
+        throw new HttpException(409, `The Display name : ${customAtttributeData.display_name}  for account ${accountId} is already exists`);
+       // console.log("check===>",findOneCustomAttribute);
+        const updateCustomAttributeData: CustomAttribute=await this.customAttribute.findOneAndUpdate({_id:id, account_id:accountId},
+            {$set:{display_name: customAtttributeData.display_name, key: customAtttributeData.key,
+                 display_type: customAtttributeData.display_type, 
+                 mode:customAtttributeData.mode,
+                description:customAtttributeData.description,
+                is_active: customAtttributeData.is_active,
+                updated_at: Date.now()
+            }},
+            { new : true, runValidators: true}
+            );
+    
+        //console.log(updateCustomAttributeData);
+        return updateCustomAttributeData;
     }
-    // // deleted record
-    // public async deleteLabel(accountId: string, Id: string): Promise<Label> {
-    //     const deleteNoteById: Label = await this.labelModel.findOneAndDelete({ $and: [{ _id: Id }, { account_id: accountId }] });
-    //     //findOneAndDelete(localeId);
-    //     if (!deleteNoteById) throw new HttpException(409, "Label doesn't exist");
-    //     return deleteNoteById;
-    // }
+    // deleted record
+    public async deleteCustomAttribute(accountId: string, Id: string): Promise<CustomAttribute> {
+        //const deleteCustomAttr: CustomAttribute = await this.customAttribute.findOneAndupdate({ $and: [{ _id: Id }, { account_id: accountId }] });
+        const deleteCustomAttr: CustomAttribute = await this.customAttribute.findByIdAndUpdate(
+            Id,
+            { $set: { is_active: 0, updated_at: Date.now() } },
+            { new: true, runValidators: true },
+          );
+        //findOneAndDelete(localeId);
+        if (!deleteCustomAttr) throw new HttpException(409, "Custom Attribute doesn't exist");
+        return deleteCustomAttr;
+    }
 
 }
 export default CustomAttributeService;
