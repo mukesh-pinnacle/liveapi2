@@ -5,7 +5,7 @@ import authMiddleware from '@/middlewares/auth.middleware';
 import { CustomAttributeDto } from '@/dtos/app/custom_attribute.dto';
 import CustomAttributeController from '@controllers/app/custom_attribute.controller';
 
-class CustomRoute implements Routes {
+class CustomAttributeRoute implements Routes {
     public path = '/app';
     public router: Router = Router();
     public customAttributeController = new CustomAttributeController();
@@ -21,4 +21,4 @@ class CustomRoute implements Routes {
     }
 }
 
-export default CustomRoute;
+export default CustomAttributeRoute;

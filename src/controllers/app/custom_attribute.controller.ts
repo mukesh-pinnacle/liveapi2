@@ -10,7 +10,7 @@ class CustomAttributeController {
         try {
             const customAtttributeData: CustomAttributeDto = req.body;
             const accountId: string =req.params.accountid;
-            const createCustomAttributeData: CustomAttribute = await this.customAttributeService.createLabel(accountId, customAtttributeData);
+            const createCustomAttributeData: CustomAttribute = await this.customAttributeService.createCustomAttribute(accountId, customAtttributeData);
             res.status(201).json({ data: createCustomAttributeData, message: 'Custom Attribute created', statusCode: 201 });
         } catch (error) {
             next(error);

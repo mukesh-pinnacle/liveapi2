@@ -16,7 +16,8 @@ import LabelRoute from './routes/app/label.route';
 import CannedResRoute from './routes/app/canned_res.route';
 import LocaleRoute from '@/routes/super_admin/locale.route';
 import AppAccountsRoute from './routes/app/accounts.route';
-import CustomRoute from './routes/app/custom_attribute.route';
+import CustomAttributeRoute from './routes/app/custom_attribute.route';
+import CustomAttributeMappingRoute from './routes/app/custom_attributedata.mapping.route'
 
 validateEnv();
 
@@ -41,7 +42,8 @@ const app = new App([
   new LabelRoute(),
   new AppLocaleRoute(),
   new AppAccountsRoute(),
-  new CustomRoute()
+  new CustomAttributeRoute(),
+  new CustomAttributeMappingRoute()
 ]);
 
 app.listen();
