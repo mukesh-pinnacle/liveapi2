@@ -45,7 +45,7 @@ class CustomAttributeService {
         if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
         if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account Id is invalid');
         const findCustomAttributeByAccountid: CustomAttribute[] = await this.customAttribute.find({ account_id: accountid }).sort( { _id : -1} );;
-        if (!findCustomAttributeByAccountid) throw new HttpException(409, "Label not available");
+        if (!findCustomAttributeByAccountid) throw new HttpException(409, "Custom Attribute not available");
         return findCustomAttributeByAccountid;
     };
 

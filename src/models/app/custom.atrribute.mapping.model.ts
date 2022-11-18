@@ -1,5 +1,6 @@
 import { model, Schema, Document } from 'mongoose';
 import { CustomAttribute } from '@/interfaces/app/custom.attribute.interface';
+import { CustomAttributeMapping } from '@/interfaces/app/custom.attribute.Mapping.interface';
 
 
 
@@ -15,17 +16,28 @@ const CustomAttributeDataSchema: Schema = new Schema({
         ref: 'accounts',
         required: true, 
     },
-    contact_id:{
+    mapping_id:{
         type: Schema.Types.ObjectId, 
-        ref: 'contacts',
+        required: true,
     },
-    conversation_id: {
-        type: Schema.Types.ObjectId, 
-        ref: 'conversation',
+    is_active:{
+        type: Number,
+        require: true,
     },
+    created_at: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    updated_at: {
+        type: Date,
+        required: true,
+        default: Date.now
+    }
+    
 });
 
 
-const CustomAttributeMappingModel = model<CustomAttribute & Document>('custom_attribute_data', CustomAttributeDataSchema);
+const CustomAttributeMappingModel = model<CustomAttributeMapping & Document>('custom_attribute_mapping', CustomAttributeDataSchema);
 
 export default CustomAttributeMappingModel;

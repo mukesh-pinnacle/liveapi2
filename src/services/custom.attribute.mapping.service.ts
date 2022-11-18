@@ -13,16 +13,19 @@ class CustomAttributeMappingService {
     public async createMapping(accountId: string, customAtttributeMapData: CustomAttributeMappingDto): Promise<CustomAttributeMapping> {
         console.log("Custom Attribute Mapping Services", accountId);
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
-        if (isEmpty(customAtttributeMapData)) throw new HttpException(400, 'Custom Attribute Mapping is empty');
-        const findcustomAttribute: CustomAttribute = await this.customAttributeMapping.findOne({ $and: [{ display_name: { $regex: new RegExp(customAtttributeData.display_name, "i") }, account_id: accountId }] });
+        if (isEmpty(customAtttributeMapData)) throw new HttpException(400, 'Custom Attribute Mapping Data is empty');
+        const findcustomAttrMap: CustomAttributeMapping = await this.customAttributeMapping.findOne(
+            { $and: [{ custom_attribute_id:customAtttributeMapData.custom_attribute_id, account_id: accountId }] });
         //console.log("service ==  > ",findcustomAttribute);
-        if (findcustomAttribute) throw new HttpException(409, `The Custom Attribute : ${customAtttributeData.display_name}  for account ${accountId} is already exists`);
+        if (findcustomAttrMap) throw new HttpException(409, `The Custom Attribute Mapping : ${customAtttributeMapData.custom_attribute_id}  for account ${accountId} is already exists`);
         const createData = {
             "account_id": accountId,
-            
+            "custom_attribute_id": customAtttributeMapData.custom_attribute_id,
+            "mapping_id": customAtttributeMapData.mapping_id,
+            "is_active": customAtttributeMapData.is_active
         };
-        const getCustomAttributeData: CustomAttribute = await this.customAttributeMapping.create(createData);
-        return getCustomAttributeData;
+        const getCustomAttrMapData: CustomAttributeMapping = await this.customAttributeMapping.create(createData);
+        return getCustomAttrMapData;
     };
     // //get Notes
     // public async getCustomAttributById(accountid: string, id: string,): Promise<CustomAttribute> {
@@ -35,13 +38,13 @@ class CustomAttributeMappingService {
     //     return findSingleCustomattribute;
     // };
 
-    // public async getCustomAttributByAccountId(accountid: string): Promise<CustomAttribute[]> {
-    //     if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
-    //     if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account Id is invalid');
-    //     const findCustomAttributeByAccountid: CustomAttribute[] = await this.customAttribute.find({ account_id: accountid }).sort( { _id : -1} );;
-    //     if (!findCustomAttributeByAccountid) throw new HttpException(409, "Label not available");
-    //     return findCustomAttributeByAccountid;
-    // };
+    public async getCustomAttributMappingByAccountId(accountid: string): Promise<CustomAttributeMapping[]> {
+        if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
+        if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account Id is invalid');
+        const findCustomAttrMapByAccountid: CustomAttributeMapping[] = await this.customAttributeMapping.find({ account_id: accountid }).sort( { _id : -1} );;
+        if (!findCustomAttrMapByAccountid) throw new HttpException(409, "Mapping not available");
+        return findCustomAttrMapByAccountid;
+    };
 
     // //update record
     // public async updateCustomAttribute(accountId: string, id: string, customAtttributeData: CustomAttributeDto): Promise<CustomAttribute> {

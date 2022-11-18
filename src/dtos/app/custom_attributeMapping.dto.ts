@@ -8,10 +8,12 @@ export class CustomAttributeMappingDto {
     @IsString()
     public account_id: ObjectId;
     @IsString()
-    public contact_id: ObjectId;
-    @IsString()
-    public conversation_id: ObjectId;
+    public mapping_id: ObjectId;
+    @IsNumber()
+    public is_active: number;
 
-    
-
+    @IsDateString()
+    public created_at: Date;
+    @IsDateString()
+    public updated_at: Date;
 }

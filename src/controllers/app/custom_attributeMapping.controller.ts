@@ -17,7 +17,7 @@ class CustomAttributeMappingController {
         }
     }
     // //get custom attribute by id
-    // public getCustomAttributById = async (req: Request, res: Response, next: NextFunction) => {
+    // public getCustomAttributMappingById = async (req: Request, res: Response, next: NextFunction) => {
     //     try {
     //         const accountid = req.params.accountid;
     //         const id: string = req.params.id;
@@ -29,16 +29,16 @@ class CustomAttributeMappingController {
     //     }
     // }
 
-    // // get All Custom attribute by Account id
-    // public getCustomAttributByAccountId = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //         const accountid = req.params.accountid;
-    //         const findCustomAttributeData: CustomAttribute[] = await this.customAttributeService.getCustomAttributByAccountId(accountid);
-    //         res.status(200).json({ data: findCustomAttributeData, message: 'find CustomAttribute by Account', statusCode: 200 });
-    //     } catch (error) {
-    //         next(error);
-    //     }
-    // }
+    // get All Custom attribute by Account id
+    public getCustomAttributMappingByAccountId = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const accountid = req.params.accountid;
+            const findCustomAttributeData: CustomAttributeMapping[] = await this.customAttributeMappingService.getCustomAttributMappingByAccountId(accountid);
+            res.status(200).json({ data: findCustomAttributeData, message: 'find CustomAttribute by Account', statusCode: 200 });
+        } catch (error) {
+            next(error);
+        }
+    }
     
     // // update Custom Attribute By Object ID
     // public updateCustomAttribute = async (req: Request, res: Response, next: NextFunction) => {
