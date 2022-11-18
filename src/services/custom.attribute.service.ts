@@ -11,7 +11,7 @@ import { Types } from "mongoose";
 class CustomAttributeService {
     public customAttribute = CustomAttributeModel;
     //create record
-    public async createLabel(accountId: string, customAtttributeData: CustomAttributeDto): Promise<CustomAttribute> {
+    public async createCustomAttribute(accountId: string, customAtttributeData: CustomAttributeDto): Promise<CustomAttribute> {
         console.log("Custom Attribute Services", accountId);
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
         if (isEmpty(customAtttributeData)) throw new HttpException(400, 'Label Data is empty');
