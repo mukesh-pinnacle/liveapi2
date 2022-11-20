@@ -23,7 +23,7 @@ class CustomAttributeController {
             const id: string = req.params.id;
             // console.log("hello from notes controller");
             const findNoteData: CustomAttribute = await this.customAttributeService.getCustomAttributById(accountid, id);
-            res.status(200).json({ data: findNoteData, message: 'findLabel', statusCode: 200 });
+            res.status(200).json({ data: findNoteData, message: 'find Custom Attribute By ID', statusCode: 200 });
         } catch (error) {
             next(error);
         }
@@ -60,7 +60,7 @@ class CustomAttributeController {
           const accountId:string=req.params.accountid;
           const deleteNoteData: CustomAttribute = await this.customAttributeService.deleteCustomAttribute(accountId,Id);
           console.log(Id);
-          res.status(200).json({ data: deleteNoteData, message: 'deleteLabel', statusCode: 200 });
+          res.status(200).json({ data: deleteNoteData, message: 'delete Custom Attribute', statusCode: 200 });
         } catch (error) {
           next(error);
         }

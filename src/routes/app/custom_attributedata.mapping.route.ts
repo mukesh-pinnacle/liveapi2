@@ -13,15 +13,16 @@ class CustomAttributeMappingRoute implements Routes {
         this.initializeRoutes();
     }
     private initializeRoutes() {
-         this.router.post(`${this.path}/accounts/:accountid/custom-attribute-map`,
-          [validationMiddleware(CustomAttributeMappingDto, 'body', true), authMiddleware], 
-          this.customAttributeMappingController.createCustomAttrMapping);
-         this.router.get(`${this.path}/accounts/:accountid/custom-attribute-map`, 
-         [validationMiddleware(CustomAttributeMappingDto, 'body', true),
-          authMiddleware], this.customAttributeMappingController.getCustomAttributMappingByAccountId);
-        //  this.router.get(`${this.path}/accounts/:accountid/custom-attribute/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeDataController.getCustomAttributById);
-        // this.router.put(`${this.path}/accounts/:accountid/custom-attribute/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeDataController.updateCustomAttribute);
-        // this.router.delete(`${this.path}/accounts/:accountid/custom-attribute/:id`, [validationMiddleware(CustomAttributeDto, 'body', true), authMiddleware], this.customAttributeDataController.deleteCustomAttribute);
+        this.router.post(`${this.path}/accounts/:accountid/custom-attribute-map`, [validationMiddleware(CustomAttributeMappingDto, 'body', true),
+            authMiddleware], this.customAttributeMappingController.createCustomAttrMapping);
+        this.router.get(`${this.path}/accounts/:accountid/custom-attribute-map`, [validationMiddleware(CustomAttributeMappingDto, 'body', true),
+            authMiddleware], this.customAttributeMappingController.getCustomAttributMappingByAccountId);
+        this.router.get(`${this.path}/accounts/:accountid/custom-attribute-map/:id`, [validationMiddleware(CustomAttributeMappingDto, 'body', true),
+            authMiddleware], this.customAttributeMappingController.getCustomAttributMapById);
+         this.router.put(`${this.path}/accounts/:accountid/custom-attribute-map/:id`, [validationMiddleware(CustomAttributeMappingDto, 'body', true), 
+         authMiddleware], this.customAttributeMappingController.updateCustomAttributeMapping);
+        this.router.delete(`${this.path}/accounts/:accountid/custom-attribute-map/:id`, [validationMiddleware(CustomAttributeMappingDto, 'body', true),
+         authMiddleware], this.customAttributeMappingController.deleteCustomAttributeMap);
     }
 }
 
