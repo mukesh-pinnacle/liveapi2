@@ -1,7 +1,7 @@
-import { WorkingHoursDto } from '@dtos/working_hours.dto';
+import { WorkingHoursDto } from '@dtos/app/working_hours.dto';
 import { HttpException } from '@exceptions/HttpException';
-import { WorkingHours } from '@interfaces/working_hours.interface';
-import workingHoursModel from '@models/working_hours.model';
+import { WorkingHours } from '@interfaces/app/working_hours.interface';
+import workingHoursModel from '@models/app/working_hours.model';
 import { isEmpty } from '@utils/util';
 import { Types } from 'mongoose';
 
@@ -22,7 +22,7 @@ class WorkingHoursService {
     return result;
   }
 
-  public async create(requestData: WorkingHoursDto): Promise<WorkingHours> {
+  public async createWorkingHours(accountid:string, requestData: WorkingHoursDto): Promise<WorkingHours> {
     if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
 
     const createResult: WorkingHours = await this.workingHours.create(requestData);

@@ -10,7 +10,7 @@ class InboxesController {
     try {
       const accountId: string = req.params.accountid;
       const findAllInboxesData: Inboxes[] = await this.inboxService.findAllInboxes(accountId);
-      res.status(200).json({ data: findAllInboxesData, message: 'find All Inboxes' });
+      res.status(200).json({ data: findAllInboxesData, message: 'find All Inboxes', statusCode: 200 });
     } catch (error) {
       next(error);
     }
@@ -22,7 +22,7 @@ class InboxesController {
       const accountId: string = req.params.accountid;
       const findOneInboxData: Inboxes = await this.inboxService.findInboxById(inboxId, accountId);
 
-      res.status(200).json({ data: findOneInboxData, message: 'findOne Inbox' });
+      res.status(200).json({ data: findOneInboxData, message: 'findOne Inbox', statusCode: 200 });
     } catch (error) {
       next(error);
     }
@@ -33,7 +33,7 @@ class InboxesController {
       const inboxData: InboxesDto = req.body;
       const accountId: string = req.params.accountid;
       const createInboxData: Inboxes = await this.inboxService.createInbox(accountId, inboxData);
-      res.status(201).json({ data: createInboxData, message: 'Inbox created' });
+      res.status(201).json({ data: createInboxData, message: 'Inbox created', statusCode: 201 });
     } catch (error) {
       next(error);
     }
@@ -45,7 +45,7 @@ class InboxesController {
       const inboxData: InboxesDto = req.body;
       const accountId: string = req.params.accountid;
       const updateInboxData: Inboxes = await this.inboxService.updateInbox(inboxId, accountId, inboxData);
-      res.status(200).json({ data: updateInboxData, message: 'Inbox updated' });
+      res.status(200).json({ data: updateInboxData, message: 'Inbox updated', statusCode: 201 });
     } catch (error) {
       next(error);
     }
@@ -56,7 +56,7 @@ class InboxesController {
       const inboxId: string = req.params.id;
       const accountId: string = req.params.accountid;
       const deleteInboxData: Inboxes = await this.inboxService.deleteInbox(inboxId, accountId);
-      res.status(200).json({ data: deleteInboxData, message: 'Inbox deleted' });
+      res.status(200).json({ data: deleteInboxData, message: 'Inbox deleted', statusCode: 200});
     } catch (error) {
       next(error);
     }

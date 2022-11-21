@@ -31,9 +31,9 @@ class WorkingHoursController {
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const requestData: WorkingHoursDto = req.body;
-      const data: WorkingHours = await this.workingHoursService.create(requestData);
-
-      res.status(201).json({ data, message: 'created' });
+      const accountID : string = req.params.accountid;
+      const data: WorkingHours = await this.workingHoursService.createWorkingHours(accountID, requestData);
+      res.status(201).json({ data, message: 'Working_Hours created' });
     } catch (error) {
       next(error);
     }
