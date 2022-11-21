@@ -17,7 +17,8 @@ class CannedResRoute implements Routes {
     }
 
     private initializeRoutes() {
-        this.router.get(`${this.path}/canned-reponses/accounts/:accountId`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedResByAcID);
+        this.router.get(`${this.path}/accounts/:accountId/canned-reponses`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedResByAcID);
+        this.router.get(`${this.path}/accounts/:accountId/canned-reponses/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedResByID);
         this.router.get(`${this.path}/canned-reponses/accounts/:accountId/shortcode/:shortcode`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedRespByShort_code);
         this.router.post(`${this.path}/accounts/:accountId/canned-reponses`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.createCannedResp);
          this.router.put(`${this.path}/accounts/:accountId/canned-reponses/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.updateCannedResp);

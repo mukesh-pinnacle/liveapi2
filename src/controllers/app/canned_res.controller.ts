@@ -17,6 +17,21 @@ class CannedResController {
             next(error);
         }
     };
+
+     //get custom attribute by id
+     public getCannedResByID = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const accountid = req.params.accountId;
+            const id: string = req.params.id;
+            console.log("hello from canned responses controller", accountid);
+            const findNoteData: CannedRes = await this.cannedResService.getCannedResById(accountid, id);
+            res.status(200).json({ data: findNoteData, message: 'find Canned Responses By ID', statusCode: 200 });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
     //get canned responses by shortcode
     public getCannedRespByShort_code = async (req: Request, res: Response, next: NextFunction) => {
         try {

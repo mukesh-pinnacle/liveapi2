@@ -30,7 +30,7 @@ class CustomAttributeService {
         const getCustomAttributeData: CustomAttribute = await this.customAttribute.create(createData);
         return getCustomAttributeData;
     };
-    //get Notes
+    //get custom attribute responses
     public async getCustomAttributById(accountid: string, id: string,): Promise<CustomAttribute> {
         if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
         if (isEmpty(id)) throw new HttpException(400, 'custome attribute is empty');

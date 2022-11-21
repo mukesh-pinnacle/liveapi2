@@ -16,9 +16,20 @@ class CannedResService {
     if (isEmpty(accountId)) throw new HttpException(400, 'Account Id is empty');
     if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
     const findbyAccountID: CannedRes[] = await this.cannedResModel.find({ account_id: accountId });
-    if (!findbyAccountID) throw new HttpException(409, "Canned Responses doesn't exist");
+    if (findbyAccountID.length===0) throw new HttpException(409, "Canned Responses doesn't exist");
     return findbyAccountID;
   }
+//  get canned responses by id
+public async getCannedResById(accountid: string, id: string,): Promise<CannedRes> {
+  if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
+  if (isEmpty(id)) throw new HttpException(400, 'Canned response id is empty');
+  if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account Id is invalid');
+  if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Canned response  id is invalid');
+  const findSingleCustomattribute: CannedRes = await this.cannedResModel.findOne({ account_id: accountid, _id: id });
+  if (!findSingleCustomattribute) throw new HttpException(409, "Canned response id not available");
+  return findSingleCustomattribute;
+};
+
   //find by caaned Responses By short_codes
   public async findCannedRespByShort_code(accountId: string, shortcode: string): Promise<CannedRes[]> {
     console.log('inside by Short Code and accountid  == ', shortcode, accountId);
