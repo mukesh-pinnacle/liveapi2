@@ -2,8 +2,7 @@ import { model, Schema, Document } from 'mongoose';
 import { WorkingHours } from '@interfaces/app/working_hours.interface';
 
 const workingHoursSchema: Schema = new Schema({
-    //inbox id require
-    inboxes_details_id: { 
+    inboxes_id: { 
         type: Schema.Types.ObjectId, 
         ref: 'InboxesDetails',
         required: true, 

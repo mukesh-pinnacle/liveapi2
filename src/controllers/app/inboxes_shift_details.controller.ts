@@ -31,8 +31,8 @@ class InboxesShiftDetailsController {
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const requestData: InboxesShiftDetailsDto = req.body;
-      const data: InboxesShiftDetails = await this.inboxShiftDetailService.create(requestData);
-
+      const accountid: string =req.params.accountid;
+      const data: InboxesShiftDetails = await this.inboxShiftDetailService.createInboxShiftDetails(accountid , requestData);
       res.status(201).json({ data, message: 'created', statusCode: 201});
     } catch (error) {
       next(error);

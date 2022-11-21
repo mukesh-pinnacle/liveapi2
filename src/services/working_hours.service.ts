@@ -8,8 +8,12 @@ import { Types } from 'mongoose';
 class WorkingHoursService {
   public workingHours = workingHoursModel;
 
-  public async findAll(): Promise<WorkingHours[]> {
-    return await this.workingHours.find();
+  public async findAll(accountID: string): Promise<WorkingHours[]> {
+    if (isEmpty(accountID)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(accountID)) throw new HttpException(400, 'Account Id is invalid');
+    const getWorkingResult: WorkingHours[]= await this.workingHours.find({ account_id: accountID }).sort({ _id: -1 });
+    if (getWorkingResult.length === 0) throw new HttpException(409, `working Hours Not available for ${accountID}`);
+    return getWorkingResult;
   }
 
   public async findById(id: string): Promise<WorkingHours> {
@@ -30,9 +34,12 @@ class WorkingHoursService {
     return createResult;
   }
 
-  public async update(id: string, requestData: WorkingHoursDto): Promise<WorkingHours> {
-    if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
+  public async update(id: string, accountID: string,requestData: WorkingHoursDto): Promise<WorkingHours> {
 
+    if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
+    if (isEmpty(accountID)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(accountID)) throw new HttpException(400, 'Account Id is invalid');
+    
     const updateResultById: WorkingHours = await this.workingHours.findByIdAndUpdate(id, { $set: requestData });
     if (!updateResultById) throw new HttpException(409, "Working hours doesn't exist");
 

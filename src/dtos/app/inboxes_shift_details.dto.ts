@@ -3,7 +3,7 @@ import {IsString, IsNumber, IsBoolean, IsDateString } from 'class-validator';
 export class InboxesShiftDetailsDto {
 
   @IsString()
-  public inboxes_details_id: String;
+  public inboxes_id: String;
 
   @IsString()
   public account_id: String;

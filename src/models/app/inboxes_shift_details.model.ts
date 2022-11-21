@@ -1,11 +1,12 @@
 import { model, Schema, Document } from 'mongoose';
 import { InboxesShiftDetails } from '@interfaces/app/inboxes_shift_details.interface';
+import { time } from 'console';
 
 const inboxesShiftDetailsSchema: Schema = new Schema({
     //inboxid required
-    inboxes_details_id: { 
+    inboxes_id: { 
         type: Schema.Types.ObjectId, 
-        ref: 'InboxesDetails',
+        ref: 'Inboxes',
         required: true, 
     },
     account_id: { 
@@ -26,11 +27,11 @@ const inboxesShiftDetailsSchema: Schema = new Schema({
         required: false,
     },
     to_time: {
-        type: Date,
+        type: String,
         required: false,
     },
     from_time: {
-        type: Date,
+        type: String,
         required: false,
     },
     is_active: {

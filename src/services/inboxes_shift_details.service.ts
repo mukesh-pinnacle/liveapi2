@@ -22,10 +22,23 @@ class InboxesShiftDetailsService {
     return result;
   }
 
-  public async create(requestData: InboxesShiftDetailsDto): Promise<InboxesShiftDetails> {
+  public async createInboxShiftDetails(accountId: string, requestData: InboxesShiftDetailsDto): Promise<InboxesShiftDetails> {
     if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
-
-    const createResult: InboxesShiftDetails = await this.inboxesShiftDetails.create(requestData);
+    if (isEmpty(accountId)) throw new HttpException(400, 'Account Id is empty');
+    if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
+    const findOneShift: InboxesShiftDetails = await this.inboxesShiftDetails.findOne({ accountId: accountId, inboxes_id: requestData.inboxes_id });
+    if (findOneShift) throw new HttpException(409, `This inbox id ${ requestData.inboxes_id} for account ${accountId} is already exists`);
+    const createData = {
+      inboxes_id: requestData.inboxes_id,
+      account_id: accountId,
+      shift_type: requestData.shift_type,
+      name: requestData.name,
+      description: requestData.description,
+      to_time: requestData.to_time,
+      from_time: requestData.from_time,
+      is_active: requestData.is_active
+    };
+    const createResult: InboxesShiftDetails = await this.inboxesShiftDetails.create(createData);
 
     return createResult;
   }

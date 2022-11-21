@@ -20,6 +20,7 @@ import CustomAttributeRoute from './routes/app/custom_attribute.route';
 import CustomAttributeMappingRoute from './routes/app/custom_attributedata.mapping.route'
 import InboxesRoute from './routes/app/inboxes.route';
 import InboxesDetailsRoute from './routes/app/inboxes_details.route';
+import InboxesShiftDetailsRoute from './routes/app/inboxes_shift_details.route';
 
 validateEnv();
 
@@ -47,7 +48,9 @@ const app = new App([
   new CustomAttributeRoute(),
   new CustomAttributeMappingRoute(),
   new InboxesRoute(),
-  new InboxesDetailsRoute()
+  new InboxesDetailsRoute(),
+  new InboxesShiftDetailsRoute()
+
 ]);
 
 app.listen();
