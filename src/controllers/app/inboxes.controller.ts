@@ -8,9 +8,9 @@ class InboxesController {
 
   public getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllInboxesData: Inboxes[] = await this.inboxService.findAllInboxes();
-
-      res.status(200).json({ data: findAllInboxesData, message: 'findAll' });
+      const accountId: string = req.params.accountid;
+      const findAllInboxesData: Inboxes[] = await this.inboxService.findAllInboxes(accountId);
+      res.status(200).json({ data: findAllInboxesData, message: 'find All Inboxes' });
     } catch (error) {
       next(error);
     }
@@ -19,10 +19,10 @@ class InboxesController {
   public getOneById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const inboxId: string = req.params.id;
+      const accountId: string = req.params.accountid;
+      const findOneInboxData: Inboxes = await this.inboxService.findInboxById(inboxId, accountId);
 
-      const findOneInboxData: Inboxes = await this.inboxService.findInboxById(inboxId);
-
-      res.status(200).json({ data: findOneInboxData, message: 'findOne' });
+      res.status(200).json({ data: findOneInboxData, message: 'findOne Inbox' });
     } catch (error) {
       next(error);
     }
@@ -31,9 +31,9 @@ class InboxesController {
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const inboxData: InboxesDto = req.body;
-      const createInboxData: Inboxes = await this.inboxService.createInbox(inboxData);
-
-      res.status(201).json({ data: createInboxData, message: 'created' });
+      const accountId: string = req.params.accountid;
+      const createInboxData: Inboxes = await this.inboxService.createInbox(accountId, inboxData);
+      res.status(201).json({ data: createInboxData, message: 'Inbox created' });
     } catch (error) {
       next(error);
     }
@@ -43,9 +43,9 @@ class InboxesController {
     try {
       const inboxId: string = req.params.id;
       const inboxData: InboxesDto = req.body;
-      const updateInboxData: Inboxes = await this.inboxService.updateInbox(inboxId, inboxData);
-
-      res.status(200).json({ data: updateInboxData, message: 'updated' });
+      const accountId: string = req.params.accountid;
+      const updateInboxData: Inboxes = await this.inboxService.updateInbox(inboxId, accountId, inboxData);
+      res.status(200).json({ data: updateInboxData, message: 'Inbox updated' });
     } catch (error) {
       next(error);
     }
@@ -54,9 +54,9 @@ class InboxesController {
   public delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const inboxId: string = req.params.id;
-      const deleteInboxData: Inboxes = await this.inboxService.deleteInbox(inboxId);
-
-      res.status(200).json({ data: deleteInboxData, message: 'deleted' });
+      const accountId: string = req.params.accountid;
+      const deleteInboxData: Inboxes = await this.inboxService.deleteInbox(inboxId, accountId);
+      res.status(200).json({ data: deleteInboxData, message: 'Inbox deleted' });
     } catch (error) {
       next(error);
     }

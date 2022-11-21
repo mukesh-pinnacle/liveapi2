@@ -8,18 +8,22 @@ import { Types } from 'mongoose';
 class InboxesDetailsService {
   public inboxesDetails = inboxesDetailsModel;
 
-  public async findAll(): Promise<InboxesDetails[]> {
-    return await this.inboxesDetails.find();
+  public async findAll(accountId: string): Promise<InboxesDetails[]> {
+    if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
+    const getAllInbox: InboxesDetails[] = await this.inboxesDetails.find({ account_id: accountId }).sort({ _id: -1 });
+    if (!getAllInbox) throw new HttpException(409, "Custom Attribute not available");
+    return getAllInbox;
   }
 
-  public async findById(id: string): Promise<InboxesDetails> {
-    if (isEmpty(id)) throw new HttpException(400, 'InboxesDetails Id is empty');
+  public async findById(id: string, accountId: string): Promise<InboxesDetails> {
+    if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
+    if (isEmpty(id)) throw new HttpException(400, 'inbox id is empty');
+    if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
     if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'InboxesDetails Id is invalid');
-
-    const result: InboxesDetails = await this.inboxesDetails.findOne({ _id: id });
-    if (!result) throw new HttpException(409, "InboxesDetails doesn't exist");
-
-    return result;
+    const inboxesDetails: InboxesDetails = await this.inboxesDetails.findOne({ account_id: accountId, _id: id });
+    if (!inboxesDetails) throw new HttpException(409, "Inbox details not available");
+    return inboxesDetails;
   }
 
   public async create(requestData: InboxesDetailsDto): Promise<InboxesDetails> {
@@ -30,9 +34,12 @@ class InboxesDetailsService {
     return createResult;
   }
 
-  public async update(id: string, requestData: InboxesDetailsDto): Promise<InboxesDetails> {
+  public async update(accountID: string, id: string, requestData: InboxesDetailsDto): Promise<InboxesDetails> {
     if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
+    if (isEmpty(accountID)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'inbox detail ID is invalid');
 
+  
     const updateResultById: InboxesDetails = await this.inboxesDetails.findByIdAndUpdate(id, { $set: requestData });
     if (!updateResultById) throw new HttpException(409, "InboxesDetails doesn't exist");
 

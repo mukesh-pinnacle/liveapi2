@@ -18,6 +18,7 @@ import LocaleRoute from '@/routes/super_admin/locale.route';
 import AppAccountsRoute from './routes/app/accounts.route';
 import CustomAttributeRoute from './routes/app/custom_attribute.route';
 import CustomAttributeMappingRoute from './routes/app/custom_attributedata.mapping.route'
+import InboxesRoute from './routes/app/inboxes.route';
 
 validateEnv();
 
@@ -43,7 +44,8 @@ const app = new App([
   new AppLocaleRoute(),
   new AppAccountsRoute(),
   new CustomAttributeRoute(),
-  new CustomAttributeMappingRoute()
+  new CustomAttributeMappingRoute(),
+  new InboxesRoute()
 ]);
 
 app.listen();

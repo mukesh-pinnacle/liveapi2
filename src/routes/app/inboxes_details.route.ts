@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Controller from '@controllers/app/inboxes_details.controller';
+import InboxesDetailsController from '@controllers/app/inboxes_details.controller';
 import { InboxesDetailsDto } from '@dtos/app/inboxes_details.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
@@ -8,7 +8,7 @@ import validateObjectId from '@/middlewares/validate_id.middleware';
 class InboxesDetailsRoute implements Routes {
   public path = '/app';
   public router: Router = Router();
-  public controller = new Controller();
+  public controller = new InboxesDetailsController();
 
   constructor() {
     this.initializeRoutes();
