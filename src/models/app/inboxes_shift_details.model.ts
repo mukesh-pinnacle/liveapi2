@@ -2,6 +2,7 @@ import { model, Schema, Document } from 'mongoose';
 import { InboxesShiftDetails } from '@interfaces/app/inboxes_shift_details.interface';
 
 const inboxesShiftDetailsSchema: Schema = new Schema({
+    //inboxid required
     inboxes_details_id: { 
         type: Schema.Types.ObjectId, 
         ref: 'InboxesDetails',

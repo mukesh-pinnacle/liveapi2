@@ -10,7 +10,6 @@ class InboxesDetailsController {
     try {
       const accountId: string= req.params.accountid;
       const data: InboxesDetails[] = await this.inboxService.findAll(accountId);
-
       res.status(200).json({ data, message: 'findAll Inboxes Details ' });
     } catch (error) {
       next(error);
@@ -32,9 +31,9 @@ class InboxesDetailsController {
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const requestData: InboxesDetailsDto = req.body;
-      const data: InboxesDetails = await this.inboxService.create(requestData);
-
-      res.status(201).json({ data, message: 'created Inboxes Details' });
+      const accountId: string=req.params.accountid;
+      const data: InboxesDetails = await this.inboxService.createInboxDetails(accountId, requestData);
+      res.status(201).json({ data, message: 'Inboxes Details Created' });
     } catch (error) {
       next(error);
     }
@@ -46,23 +45,22 @@ class InboxesDetailsController {
       const inboxDetailId: string = req.params.id;
       const requestData: InboxesDetailsDto = req.body;
       const data: InboxesDetails = await this.inboxService.update(accountId, inboxDetailId, requestData);
-
-      res.status(200).json({ data, message: 'updated Inboxes Details' });
+      res.status(200).json({ data, message: ' Inboxes Details updated' });
     } catch (error) {
       next(error);
     }
   };
 
-  public delete = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const inboxDetailId: string = req.params.id;
-      const data: InboxesDetails = await this.inboxService.delete(inboxDetailId);
+  // public delete = async (req: Request, res: Response, next: NextFunction) => {
+  //   try {
+  //     const inboxDetailId: string = req.params.id;
+  //     const data: InboxesDetails = await this.inboxService.delete(inboxDetailId);
 
-      res.status(200).json({ data, message: 'deleted Inboxes Details' });
-    } catch (error) {
-      next(error);
-    }
-  };
+  //     res.status(200).json({ data, message: 'deleted Inboxes Details' });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
 }
 
 export default InboxesDetailsController;
