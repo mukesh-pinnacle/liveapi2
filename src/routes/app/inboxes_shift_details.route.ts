@@ -17,11 +17,16 @@ class InboxesShiftDetailsRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/accounts/:accountid/inboxes-shift-details`,[validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware], this.controller.getAll);
-    this.router.get(`${this.path}/accounts/:accountid/inboxes-shift-details/:id`,[validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware], this.controller.getOneById);
-    this.router.post(`${this.path}/accounts/:accountid/inboxes-shift-details`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware], this.controller.create);
-    this.router.put(`${this.path}/accounts/:accountid/inboxes-shift-details/:id`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware], this.controller.update);
-    this.router.delete(`${this.path}/accounts/:accountid/inboxes-shift-details/:id`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware], this.controller.delete);
+    this.router.get(`${this.path}/accounts/:accountid/inboxes-shift-details`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware],
+      this.controller.getAll);
+    this.router.get(`${this.path}/accounts/:accountid/inboxes-shift-details/:id`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware],
+      this.controller.getOneById);
+    this.router.post(`${this.path}/accounts/:accountid/inboxes-shift-details`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware],
+      this.controller.create);
+    this.router.put(`${this.path}/accounts/:accountid/inboxes-shift-details/:id`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware],
+      this.controller.update);
+    this.router.delete(`${this.path}/accounts/:accountid/inboxes-shift-details/:id`, [validationMiddleware(InboxesShiftDetailsDto, 'body', true), authMiddleware],
+      this.controller.delete);
   }
 }
 

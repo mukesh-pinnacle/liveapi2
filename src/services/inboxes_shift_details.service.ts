@@ -8,15 +8,19 @@ import { Types } from 'mongoose';
 class InboxesShiftDetailsService {
   public inboxesShiftDetails = inboxesShiftDetailsModel;
 
-  public async findAll(): Promise<InboxesShiftDetails[]> {
-    return await this.inboxesShiftDetails.find();
+  public async findAllInboxShiftDetails(accountId: string): Promise<InboxesShiftDetails[]> {
+    if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
+    const inboxes_shift: InboxesShiftDetails[] = await this.inboxesShiftDetails.find({ account_id: accountId }).sort({ _id: -1 });
+    return inboxes_shift;
   }
 
-  public async findById(id: string): Promise<InboxesShiftDetails> {
+  public async findInboxShiftDetailsById(accountId: string, id: string): Promise<InboxesShiftDetails> {
     if (isEmpty(id)) throw new HttpException(400, 'Inbox shift details Id is empty');
     if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Shift details Id is invalid');
-
-    const result: InboxesShiftDetails = await this.inboxesShiftDetails.findOne({ _id: id });
+    if (isEmpty(accountId)) throw new HttpException(400, 'Account Id is empty');
+    if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
+    const result: InboxesShiftDetails = await this.inboxesShiftDetails.findOne({ _id: id, account_id: accountId });
     if (!result) throw new HttpException(409, "Inbox shift details doesn't exist");
 
     return result;
@@ -26,8 +30,8 @@ class InboxesShiftDetailsService {
     if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
     if (isEmpty(accountId)) throw new HttpException(400, 'Account Id is empty');
     if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
-    const findOneShift: InboxesShiftDetails = await this.inboxesShiftDetails.findOne({ accountId: accountId, inboxes_id: requestData.inboxes_id });
-    if (findOneShift) throw new HttpException(409, `This inbox id ${ requestData.inboxes_id} for account ${accountId} is already exists`);
+    const findOneShift: InboxesShiftDetails = await this.inboxesShiftDetails.findOne({ accountId: accountId, name: requestData.name });
+     if (findOneShift) throw new HttpException(409, `This inbox shift name ${ requestData.name} for account ${accountId} is already exists`);
     const createData = {
       inboxes_id: requestData.inboxes_id,
       account_id: accountId,
@@ -43,20 +47,32 @@ class InboxesShiftDetailsService {
     return createResult;
   }
 
-  public async update(id: string, requestData: InboxesShiftDetailsDto): Promise<InboxesShiftDetails> {
+  public async updateInboxShiftDetails(accountid: string, id: string, requestData: InboxesShiftDetailsDto): Promise<InboxesShiftDetails> {
     if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
-
-    const updateResultById: InboxesShiftDetails = await this.inboxesShiftDetails.findByIdAndUpdate(id, { $set: requestData });
+    if (isEmpty(id)) throw new HttpException(400, 'Inbox Shift id is empty');
+    if (isEmpty(accountid)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Inboxes shift Id is invalid');
+    if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account Id is invalid');
+    if (requestData.name) {
+      const findInboxshift: InboxesShiftDetails = await this.inboxesShiftDetails.findOne({ name: { $regex: new RegExp(requestData.name, "i") }, account_id: accountid });
+      if (findInboxshift && findInboxshift._id.toString() != id) throw new HttpException(409, `This name ${requestData.name} already exists for account ${accountid}`);
+    }
+    const updateResultById: InboxesShiftDetails = await this.inboxesShiftDetails.findByIdAndUpdate(id,
+      { $set: requestData, updated_at: Date.now() },
+      { new: true, runValidators: true });
     if (!updateResultById) throw new HttpException(409, "Inbox shift details doesn't exist");
 
     return updateResultById;
   }
 
-  public async delete(id: string): Promise<InboxesShiftDetails> {
-    const deleteResultById: InboxesShiftDetails = await this.inboxesShiftDetails.findByIdAndDelete(id);
-    if (!deleteResultById) throw new HttpException(409, "Inbox shift details doesn't exist");
-
-    return deleteResultById;
+  public async deleteInboxShiftDetails(accountid: string, id: string): Promise<InboxesShiftDetails> {
+    const deleteInboxshiftById: InboxesShiftDetails = await this.inboxesShiftDetails.findOneAndUpdate(
+      { $and: [{ _id: id }, { account_id: accountid }] },
+      { $set: { is_active: 0, updated_at: Date.now() } },
+      { new: true, runValidators: true }
+    );
+    if (!deleteInboxshiftById) throw new HttpException(409, "Inbox shift details doesn't exist");
+    return deleteInboxshiftById;
   }
 }
 

@@ -8,9 +8,10 @@ class InboxesShiftDetailsController {
 
   public getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data: InboxesShiftDetails[] = await this.inboxShiftDetailService.findAll();
-
-      res.status(200).json({ data, message: 'findAll',statusCode: 200});
+      const accountId: string =req.params.accountid;
+      const data: InboxesShiftDetails[] = await this.inboxShiftDetailService.findAllInboxShiftDetails(accountId);
+      
+      res.status(200).json({ data, message: 'findAll Inbox Shift Details',statusCode: 200});
     } catch (error) {
       next(error);
     }
@@ -19,10 +20,9 @@ class InboxesShiftDetailsController {
   public getOneById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const inboxDetailId: string = req.params.id;
-
-      const data: InboxesShiftDetails = await this.inboxShiftDetailService.findById(inboxDetailId);
-
-      res.status(200).json({ data, message: 'findOne', statusCode: 200 });
+      const accountid: string =req.params.accountid;
+      const data: InboxesShiftDetails = await this.inboxShiftDetailService.findInboxShiftDetailsById(accountid, inboxDetailId);
+      res.status(200).json({ data, message: 'findOne Inbox Shift Details', statusCode: 200 });
     } catch (error) {
       next(error);
     }
@@ -33,7 +33,7 @@ class InboxesShiftDetailsController {
       const requestData: InboxesShiftDetailsDto = req.body;
       const accountid: string =req.params.accountid;
       const data: InboxesShiftDetails = await this.inboxShiftDetailService.createInboxShiftDetails(accountid , requestData);
-      res.status(201).json({ data, message: 'created', statusCode: 201});
+      res.status(201).json({ data, message: 'Inbox Shift Details created', statusCode: 201});
     } catch (error) {
       next(error);
     }
@@ -43,9 +43,10 @@ class InboxesShiftDetailsController {
     try {
       const inboxDetailId: string = req.params.id;
       const requestData: InboxesShiftDetailsDto = req.body;
-      const data: InboxesShiftDetails = await this.inboxShiftDetailService.update(inboxDetailId, requestData);
+      const accountid: string =req.params.accountid;
+      const data: InboxesShiftDetails = await this.inboxShiftDetailService.updateInboxShiftDetails(accountid, inboxDetailId, requestData);
 
-      res.status(200).json({ data, message: 'updated', statusCode: 201});
+      res.status(200).json({ data, message: 'Inbox Shift Details updated', statusCode: 201});
     } catch (error) {
       next(error);
     }
@@ -54,9 +55,9 @@ class InboxesShiftDetailsController {
   public delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const inboxDetailId: string = req.params.id;
-      const data: InboxesShiftDetails = await this.inboxShiftDetailService.delete(inboxDetailId);
-
-      res.status(200).json({ data, message: 'deleted', statusCode: 201  });
+      const accountid: string =req.params.accountid;
+      const data: InboxesShiftDetails = await this.inboxShiftDetailService.deleteInboxShiftDetails(accountid, inboxDetailId);
+      res.status(200).json({ data, message: 'Inbox Shift Details deleted', statusCode: 201  });
     } catch (error) {
       next(error);
     }

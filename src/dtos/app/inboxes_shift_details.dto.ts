@@ -15,15 +15,15 @@ export class InboxesShiftDetailsDto {
   public shift_type: String;
 
   @IsString()
-  public name: String;
+  public name: string;
 
   @IsString()
   public description: String;
 
-  @IsDateString()
+  @IsString()
   public to_time: String;
 
-  @IsDateString()
+  @IsString()
   public from_time: String;
 
   @IsNumber()

@@ -5,9 +5,9 @@ export interface InboxesShiftDetails {
     inboxes_id: ObjectId;
     account_id: ObjectId;
     shift_type: String;
-    name: String;
+    name: string;
     description: String;
-    to_time: String;
+    to_time: string;
     from_time: String;
     is_active: Number;
     created_at: Date;
