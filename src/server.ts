@@ -21,6 +21,7 @@ import CustomAttributeMappingRoute from './routes/app/custom_attributedata.mappi
 import InboxesRoute from './routes/app/inboxes.route';
 import InboxesDetailsRoute from './routes/app/inboxes_details.route';
 import InboxesShiftDetailsRoute from './routes/app/inboxes_shift_details.route';
+import WorkingHoursRoute from './routes/app/working_hours.route';
 
 validateEnv();
 
@@ -49,7 +50,8 @@ const app = new App([
   new CustomAttributeMappingRoute(),
   new InboxesRoute(),
   new InboxesDetailsRoute(),
-  new InboxesShiftDetailsRoute()
+  new InboxesShiftDetailsRoute(),
+  new WorkingHoursRoute()
 
 ]);
 
