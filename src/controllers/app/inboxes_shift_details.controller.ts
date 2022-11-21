@@ -10,7 +10,7 @@ class InboxesShiftDetailsController {
     try {
       const data: InboxesShiftDetails[] = await this.inboxShiftDetailService.findAll();
 
-      res.status(200).json({ data, message: 'findAll' });
+      res.status(200).json({ data, message: 'findAll',statusCode: 200});
     } catch (error) {
       next(error);
     }
@@ -22,7 +22,7 @@ class InboxesShiftDetailsController {
 
       const data: InboxesShiftDetails = await this.inboxShiftDetailService.findById(inboxDetailId);
 
-      res.status(200).json({ data, message: 'findOne' });
+      res.status(200).json({ data, message: 'findOne', statusCode: 200 });
     } catch (error) {
       next(error);
     }
@@ -33,7 +33,7 @@ class InboxesShiftDetailsController {
       const requestData: InboxesShiftDetailsDto = req.body;
       const data: InboxesShiftDetails = await this.inboxShiftDetailService.create(requestData);
 
-      res.status(201).json({ data, message: 'created' });
+      res.status(201).json({ data, message: 'created', statusCode: 201});
     } catch (error) {
       next(error);
     }
@@ -45,7 +45,7 @@ class InboxesShiftDetailsController {
       const requestData: InboxesShiftDetailsDto = req.body;
       const data: InboxesShiftDetails = await this.inboxShiftDetailService.update(inboxDetailId, requestData);
 
-      res.status(200).json({ data, message: 'updated' });
+      res.status(200).json({ data, message: 'updated', statusCode: 201});
     } catch (error) {
       next(error);
     }
@@ -56,7 +56,7 @@ class InboxesShiftDetailsController {
       const inboxDetailId: string = req.params.id;
       const data: InboxesShiftDetails = await this.inboxShiftDetailService.delete(inboxDetailId);
 
-      res.status(200).json({ data, message: 'deleted' });
+      res.status(200).json({ data, message: 'deleted', statusCode: 201  });
     } catch (error) {
       next(error);
     }
