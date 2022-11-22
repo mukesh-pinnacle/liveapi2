@@ -4,7 +4,7 @@ import { WorkingHours } from '@interfaces/app/working_hours.interface';
 const workingHoursSchema: Schema = new Schema({
     inboxes_id: { 
         type: Schema.Types.ObjectId, 
-        ref: 'InboxesDetails',
+        ref: 'Inboxes',
         required: true, 
     },
     inboxes_shift_id: { 

@@ -26,11 +26,20 @@ class WorkingHoursService {
     return result;
   }
 
-  public async createWorkingHours(accountid:string, requestData: WorkingHoursDto): Promise<WorkingHours> {
-    if (isEmpty(requestData)) throw new HttpException(400, 'request data is empty');
+  public async createWorkingHours( accountId:string, reqWorkingData: WorkingHoursDto): Promise<WorkingHours> {
+    if (isEmpty(reqWorkingData)) throw new HttpException(400, 'request data is empty');
+    if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
+    if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
 
-    const createResult: WorkingHours = await this.workingHours.create(requestData);
-
+    const findWorkingHours: WorkingHours = await this.workingHours.findOne({ $and: [{ inboxes_id: reqWorkingData.inboxes_id, account_id: accountId }] });
+    //console.log("service ==  > ",findcustomAttribute);
+    if (findWorkingHours) throw new HttpException(409, `The working for inbox id: ${reqWorkingData.inboxes_id}  for account ${accountId} is already exists`);
+    const createData={
+      "account_id": accountId,
+      "inboxes_id" : reqWorkingData.inboxes_id,
+      "inboxes_shift_id": reqWorkingData.inboxes_shift_id
+    };
+    const createResult: WorkingHours = await this.workingHours.create(createData);
     return createResult;
   }
 
