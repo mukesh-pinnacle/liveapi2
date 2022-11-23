@@ -9,7 +9,7 @@ class WorkingHoursController {
   public getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const accountID: string=req.params.accountid
-      const data: WorkingHours[] = await this.workingHoursService.findAll(accountID);
+      const data: WorkingHours[] = await this.workingHoursService.findAllWorkingHours(accountID);
       res.status(200).json({ data, message: 'findAll', statusCode: 200 });
     } catch (error) {
       next(error);
@@ -18,9 +18,9 @@ class WorkingHoursController {
 
   public getOneById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const inboxDetailId: string = req.params.id;
-
-      const data: WorkingHours = await this.workingHoursService.findById(inboxDetailId);
+      const workinghrID: string = req.params.id;
+      const accountID: string= req.params.accountid
+      const data: WorkingHours = await this.workingHoursService.findWorkingHoursById(accountID, workinghrID);
 
       res.status(200).json({ data, message: 'findOne', statusCode: 200 });
     } catch (error) {
@@ -41,10 +41,10 @@ class WorkingHoursController {
 
   public update = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const inboxDetailId: string = req.params.id;
+      const workingHrID: string = req.params.id;
       const requestData: WorkingHoursDto = req.body;
       const accountID: string=req.params.accountid;
-      const data: WorkingHours = await this.workingHoursService.update(inboxDetailId, accountID, requestData);
+      const data: WorkingHours = await this.workingHoursService.updateWorkingHours(workingHrID, accountID, requestData);
       res.status(200).json({ data, message: 'updated', statusCode: 201  });
     } catch (error) {
       next(error);
@@ -53,8 +53,9 @@ class WorkingHoursController {
 
   public delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const inboxDetailId: string = req.params.id;
-      const data: WorkingHours = await this.workingHoursService.delete(inboxDetailId);
+      const workingHrID: string = req.params.id;
+      const accaccountID: string= req.params.accountid;
+      const data: WorkingHours = await this.workingHoursService.deleteWorkingHours(accaccountID , workingHrID);
 
       res.status(200).json({ data, message: 'deleted', statusCode: 201 });
     } catch (error) {

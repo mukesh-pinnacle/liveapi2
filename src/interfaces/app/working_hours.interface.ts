@@ -4,8 +4,9 @@ export interface WorkingHours {
     _id: Number;
     inboxes_id: ObjectId;
     account_id: ObjectId;
+    inbox_shift_id: ObjectId;
     day_of_week: Number;
-    closed_all_day: Number;
+    closed_all_day: Boolean;
     open_hour: Number;
     open_minutes: Number;
     close_hour: Number;

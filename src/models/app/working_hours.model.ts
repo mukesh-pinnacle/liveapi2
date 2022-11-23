@@ -7,6 +7,11 @@ const workingHoursSchema: Schema = new Schema({
         ref: 'Inboxes',
         required: true, 
     },
+    inbox_shift_id:{
+        type : Schema.Types.ObjectId,
+        ref: 'InboxesShiftDetails',
+        require: true,
+    },
     account_id: { 
         type: Schema.Types.ObjectId, 
         ref: 'Accounts',

@@ -6,10 +6,12 @@ export class WorkingHoursDto {
   public account_id: String;
   @IsString()
   public inboxes_id: object;
+  @IsString()
+  inbox_shift_id: Object
   @IsNumber()
   public day_of_week: Number;
-  @IsNumber()
-  public closed_all_day: Number;
+  @IsBoolean()
+  public closed_all_day: Boolean;
   @IsNumber()
   public open_hour: Number;
   @IsNumber()
