@@ -1,0 +1,38 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@customAttributeMapid =63761bcb0a8c7f6ca90bd1dd
+###
+# Find All CustomAttributeMapping by account id
+GET {{ baseURL }}/accounts/{{account_id}}/custom-attribute-map
+
+###
+# Find CustomAttributeMapping By Id
+GET {{ baseURL }}/accounts/{{account_id}}/custom-attribute-map/{{customAttributeMapid}}
+
+###
+# Create CustomAttributeMapping 
+POST {{ baseURL }}/accounts/{{account_id}}/custom-attribute-map
+Content-Type: application/json
+
+{
+    "custom_attribute_id":"6379d43b5ec904f9e808a96f",
+    "mapping_id":"635ba6239bffd21b730cef13",
+    "is_active":1
+}
+
+
+###
+# Modify CustomAttributeMapping By Id
+PUT {{ baseURL }}/accounts/{{account_id}}/custom-attribute-map/{{customAttributeMapid}}
+Content-Type: application/json
+
+{   
+    "mapping_id": "635ba6239bffd21b730cef13",
+    "is_active": 10
+}
+
+###
+# Delete CustomAttributeMapping By Id
+DELETE {{ baseURL }}/accounts/{{account_id}}/custom-attribute-map/{{customAttributeMapid}}

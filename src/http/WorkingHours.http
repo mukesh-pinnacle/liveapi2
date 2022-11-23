@@ -1,0 +1,49 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@workinghr_id=637a372d3263ebe09be8f385
+###
+# Find All Working Hours by account id
+GET {{ baseURL }}/accounts/{{account_id}}/working-hours
+
+###
+# Find Working Hours By Id
+GET {{ baseURL }}/accounts/{{account_id}}/working-hours/{{workinghr_id}}
+
+###
+# Create Working Hours 
+POST {{ baseURL }}/accounts/{{account_id}}/working-hours
+Content-Type: application/json
+
+{
+    "inboxes_id": "637a372d3263ebe09be8f386",
+    "inbox_shift_id": "637bb1bb55656b14fee1121b",
+    "day_of_week": 1,
+    "closed_all_day": false,
+    "open_hour": 9,
+    "open_minutes": 0,
+    "close_hour": 17,
+    "closed_minutes": 0
+}
+
+
+###
+# Modify Working Hours By Id
+PUT {{ baseURL }}/accounts/{{account_id}}/working-hours/{{workinghr_id}}
+Content-Type: application/json
+
+{
+    "inboxes_id": "637a372d3263ebe09be8f386",
+    "inbox_shift_id": "637bb1bb55656b14fee1121b",
+    "day_of_week": 1,
+    "closed_all_day": false,
+    "open_hour": 9,
+    "open_minutes": 0,
+    "close_hour": 17,
+    "closed_minutes": 0
+}
+
+###
+# Delete Working Hours By Id
+DELETE {{ baseURL }}/accounts/{{account_id}}/working-hours/{{workinghr_id}}

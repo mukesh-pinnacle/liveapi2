@@ -1,0 +1,39 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@inbox_id=637a372d3263ebe09be8f385
+###
+# Find All inbox by account id
+GET {{ baseURL }}/accounts/{{account_id}}/inboxes
+
+###
+# Find User By Id
+GET {{ baseURL }}/accounts/{{account_id}}/inboxes/{{inbox_id}}
+
+###
+# Create inbox 
+POST {{ baseURL }}/accounts/{{account_id}}/inboxes
+Content-Type: application/json
+
+{
+    "account_id": "635ba6239bffd21b730cef13",
+    "name": "whatsApp Inbox",
+    "channel_type_id": "6379d44a5ec904f9e808a973",
+    "is_active": 1
+}
+
+
+###
+# Modify inbox By Id
+PUT {{ baseURL }}/accounts/{{account_id}}/inboxes/{{inbox_id}}
+Content-Type: application/json
+{
+        "channel_type_id": "6379d44a5ec904f9e808a973",
+        "name": "line Inbox",
+        "is_active": 10
+}
+
+###
+# Delete inbox By Id
+DELETE {{ baseURL }}/accounts/{{account_id}}/inboxes/{{inbox_id}}

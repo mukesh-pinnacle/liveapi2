@@ -1,0 +1,54 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@inbox_details_id=637a372d3263ebe09be8f385
+###
+# Find All inboxes-details by account id
+GET {{ baseURL }}/accounts/{{account_id}}/inboxes-details
+
+###
+# Find inboxes-details By Id
+GET {{ baseURL }}/accounts/{{account_id}}/inboxes-details/{{inbox_details_id}}
+
+###
+# Create inboxes-details 
+POST {{ baseURL }}/accounts/{{account_id}}/inboxes-details
+Content-Type: application/json
+
+{
+    "inboxes_id": "637a37173263ebe09be8f381",
+    "enable_auto_assignment": true,
+    "greeting_enabled": true,
+    "greeting_message": "Welcome to whatsApp chat inboxes",
+    "email_address": "email@pinnacle.in",
+    "working_hours_enabled": true,
+    "out_of_office_message": "thank you for contacting currently we are not available, wll connect you soon",
+    "timezone": "IST",
+    "csat_survey_enabled": true,
+    "allow_messages_after_resolved": true
+}
+
+
+###
+# Modify inboxes-details By Id
+PUT {{ baseURL }}/accounts/{{account_id}}/inboxes-details/{{inbox_details_id}}
+Content-Type: application/json
+
+{
+    "inboxes_id": "637a37173263ebe09be8f381",
+    "account_id": "635ba6239bffd21b730cef14",
+    "enable_auto_assignment": false,
+    "greeting_enabled": false,
+    "greeting_message": "Welcome to whatsApp chat inboxes",
+    "email_address": "email@pinnacle.in",
+    "working_hours_enabled": false,
+    "out_of_office_message": "thank you for contacting currently we are not available, wll connect you soon",
+    "timezone": "IST",
+    "csat_survey_enabled": false,
+    "allow_messages_after_resolved": false
+}
+
+###
+# Delete inboxes-details By Id
+DELETE {{ baseURL }}/accounts/{{account_id}}/inboxes-details/{{inbox_details_id}}

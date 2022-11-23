@@ -1,0 +1,47 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@inboxes-shift-details_id=637a372d3263ebe09be8f385
+###
+# Find All inboxes-shift-details by account id
+GET {{ baseURL }}/accounts/{{account_id}}/inboxes-shift-details
+
+###
+# Find inboxes-shift-details By Id
+GET {{ baseURL }}/accounts/{{account_id}}/inboxes-shift-details/{{inboxes-shift-details_id}}
+
+###
+# Create inboxes-shift-details 
+POST {{ baseURL }}/accounts/{{account_id}}/inboxes-shift-details
+Content-Type: application/json
+
+{
+     "inboxes_id": "637a372d3263ebe09be8f385",
+    "shift_type": "afternoon",
+    "name": "Third shift",
+    "description": "Afternoon shift",
+    "to_time": "02:30PM",
+    "from_time": "09:30PM",
+    "is_active": 1
+}
+
+
+###
+# Modify inboxes-shift-details By Id
+PUT {{ baseURL }}/accounts/{{account_id}}/inboxes-shift-details/{{inboxes-shift-details_id}}
+Content-Type: application/json
+
+{
+     "inboxes_id": "637a372d3263ebe09be8f385",
+    "shift_type": "afternoon",
+    "name": "Third shift",
+    "description": "Afternoon shift",
+    "to_time": "02:30PM",
+    "from_time": "09:30PM",
+    "is_active": 10
+}
+
+###
+# Delete inboxes-shift-details By Id
+DELETE {{ baseURL }}/accounts/{{account_id}}/inboxes-shift-details/{{inboxes-shift-details_id}}
