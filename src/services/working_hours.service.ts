@@ -37,7 +37,7 @@ class WorkingHoursService {
     const createData={
       "account_id": accountId,
       "inboxes_id" : reqWorkingData.inboxes_id,
-      "inboxes_shift_id": reqWorkingData.inboxes_shift_id
+      
     };
     const createResult: WorkingHours = await this.workingHours.create(createData);
     return createResult;

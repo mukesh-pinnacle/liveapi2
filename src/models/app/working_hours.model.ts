@@ -7,15 +7,34 @@ const workingHoursSchema: Schema = new Schema({
         ref: 'Inboxes',
         required: true, 
     },
-    inboxes_shift_id: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'InboxesShiftDetails',
-        required: true, 
-    },
     account_id: { 
         type: Schema.Types.ObjectId, 
         ref: 'Accounts',
         required: true, 
+    },
+    day_of_week:{
+        type : Number,
+        require: true,
+    },
+    closed_all_day:{
+        type : Boolean,
+        require: false,
+    },
+    open_hour:{
+        type : Number,
+        require: false,
+    },
+    open_minutes:{
+        type : Number,
+        require: false,
+    },
+    close_hour: {
+        type : Number,
+        require: false,
+    },
+    closed_minutes:{
+        type : Number,
+        require: false,
     },
     created_at: {
         type: Date,
