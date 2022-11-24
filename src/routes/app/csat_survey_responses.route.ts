@@ -23,8 +23,8 @@ class CsatSurveyResponsesRoute implements Routes {
       this.controller.create);
     this.router.put(`${this.path}/accounts/:accountid/csat_survey_responses/:id`, [validationMiddleware(CsatSurveyResponsesDto, 'body', true), authMiddleware],
       this.controller.update);
-    this.router.delete(`${this.path}/accounts/:accountid/csat_survey_responsess/:id`, [validationMiddleware(CsatSurveyResponsesDto, 'body', true), authMiddleware],
-      this.controller.delete);
+    // this.router.delete(`${this.path}/accounts/:accountid/csat_survey_responsess/:id`, [validationMiddleware(CsatSurveyResponsesDto, 'body', true), authMiddleware],
+    //   this.controller.delete);
   }
 }
 

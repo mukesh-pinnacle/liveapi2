@@ -32,6 +32,7 @@ const CsatSurveySchema: Schema = new Schema({
     rating:{
         type: Number,
         require: true,
+        //max value 5
     },
     feedback_message:{
         type: String,
