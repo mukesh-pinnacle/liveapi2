@@ -21,8 +21,8 @@ class MessageController {
             try {
                 const messageData: MessageDto = req.body;
                 const accountId: string = req.params.accountid;
-                const getMessageData: MessageInt = await this.messageService.createAssignToAgent(accountId, messageData);
-                res.status(201).json({ data: getMessageData, message: 'Message Created with assignToAgent', statusCode: 201 });
+               // const getMessageData: MessageInt = await this.messageService.createAssignToAgent(accountId, messageData);
+               // res.status(201).json({ data: getMessageData, message: 'Message Created with assignToAgent', statusCode: 201 });
         } catch (error) {
             next(error);
         }
