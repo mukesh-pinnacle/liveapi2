@@ -1,0 +1,38 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@conversation_id=637a372d3263ebe09be8f385
+
+###
+# Find chat assign  By Id
+GET   {{ baseURL }}/accounts/{{account_id}}/chat-assign/conversation/{{conversation_id}}
+
+###
+# Create inbox 
+POST  {{ baseURL }}/accounts/{{account_id}}/chat-assign
+Content-Type: application/json
+
+{
+    "conversation_id": "635ba6239bffd21b730cef13",
+    "is_team": 1,
+    "team_id": "null",
+    "assignee_id" : "635ba6239bffd21b730cef13",
+    "is_active_chat": 1
+}
+
+
+###
+# Modify inbox By Id
+PUT {{ baseURL }}accounts/{{account_id}}/chat-assign/63806808124d7cb4d8b73614
+Content-Type: application/json
+
+{
+
+    "conversation_id": "635ba6239bffd21b730cef13",
+    "is_team": 1,
+    "team_id": "null",
+    "assignee_id" : "635ba6239bffd21b730cef13",
+    "is_active_chat": 10
+
+}

@@ -23,6 +23,7 @@ import InboxesDetailsRoute from './routes/app/inboxes_details.route';
 import InboxesShiftDetailsRoute from './routes/app/inboxes_shift_details.route';
 import WorkingHoursRoute from './routes/app/working_hours.route';
 import MessageRoute from './routes/app/message.route';
+import ChatAssignRoute from './routes/app/chat_assign.route';
 
 validateEnv();
 
@@ -53,7 +54,8 @@ const app = new App([
   new InboxesDetailsRoute(),
   new InboxesShiftDetailsRoute(),
   new WorkingHoursRoute(),
-  new MessageRoute()
+  new MessageRoute(),
+  new ChatAssignRoute()
 
 ]);
 
