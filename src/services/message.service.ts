@@ -33,11 +33,11 @@ class MessageService {
         if (isEmpty(messageData)) throw new HttpException(400, 'Message Data is empty');
         var createMessage;
         if (messageData.content_type == 1) {
-            createMessage={
-                "account_id":accountId,
-                "conversation_id": messageData.conversation_id;
-                ""
-            }
+            // createMessage={
+            //     "account_id":accountId,
+            //     "conversation_id": messageData.conversation_id;
+            //     ""
+            // }
             const chatassign: ChatAssign= await this.chatAssignModel.create(createMessage);
            /// const findmessageid: MessageInt = await this.messageModel.findOne({ $and: [{ conversation_id: messageData.conversation_id, account_id: accountId }] });
             //if (findmessageid) throw new HttpException(409, `The Conversation id : ${messageData.conversation_id}  for account ${accountId} is already exists`);
