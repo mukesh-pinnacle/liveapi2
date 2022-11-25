@@ -10,29 +10,30 @@ import { ChatAssignDto } from '@/dtos/app/chat_assign.dto';
 class ChatAssignService {
     public chatAssignModel = ChatAssignModel;
     //created 
-    public async createChatAssing(accountId: string, chatassignData: ChatAssignDto): Promise<ChatAssign> {
+    public async createChatAssing(accountId: string, conversationId: string ,chatassignData: ChatAssignDto): Promise<ChatAssign> {
         if (isEmpty(chatassignData)) throw new HttpException(400, 'inboxData is empty');
         if (isEmpty(accountId)) throw new HttpException(400, 'Account id is empty');
+        if (isEmpty(conversationId)) throw new HttpException(400, 'Conversation id is empty');
         if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
+        if (!Types.ObjectId.isValid(conversationId)) throw new HttpException(400, 'Conversation id is invalid');
+        
+        console.log("chatassignData = ",JSON.stringify(chatassignData));
+        console.log("chatassignData.is_team = ",JSON.stringify(chatassignData.is_team));
+        
         var createChatAssignData;
-        if (chatassignData.is_team === 0) {
+        if ( chatassignData.is_team === 1 ) 
+        {
+            if (isEmpty(chatassignData.team_id) || chatassignData.team_id === "null") throw new HttpException(400, 'team_id is null');
+        }
             createChatAssignData = {
                 "account_id": accountId,
+                "conversation_id" : conversationId,
+                "is_active_chat": 1,
                 ...chatassignData
             };
-        }
-        else if (chatassignData.is_team === 1) {
-            console.log(" iam here");
-            createChatAssignData = {
-                "account_id": accountId,
-                "team_id": "Null",
-                ...chatassignData
-            };
-        }
-        const createinboxData: ChatAssign = await this.chatAssignModel.create(createChatAssignData);
-        return createinboxData;
+        const createChatAssing: ChatAssign = await this.chatAssignModel.create(createChatAssignData);
+        return createChatAssing;
     }
-
     
 
     public async findByConversationId(conversationId: string, accountId: string): Promise<ChatAssign> {
