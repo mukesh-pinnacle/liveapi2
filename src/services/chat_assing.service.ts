@@ -16,10 +16,8 @@ class ChatAssignService {
         if (isEmpty(conversationId)) throw new HttpException(400, 'Conversation id is empty');
         if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
         if (!Types.ObjectId.isValid(conversationId)) throw new HttpException(400, 'Conversation id is invalid');
-        
         console.log("chatassignData = ",JSON.stringify(chatassignData));
         console.log("chatassignData.is_team = ",JSON.stringify(chatassignData.is_team));
-        
         var createChatAssignData;
         if ( chatassignData.is_team === 1 ) 
         {
