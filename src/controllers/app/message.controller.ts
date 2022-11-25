@@ -18,15 +18,15 @@ class MessageController {
     }
 
     public createAssignToAgent = async (req: Request, res: Response, next: NextFunction) => {
-            try {
-                const messageData: MessageDto = req.body;
-                const accountId: string = req.params.accountid;
-               // const getMessageData: MessageInt = await this.messageService.createAssignToAgent(accountId, messageData);
-               // res.status(201).json({ data: getMessageData, message: 'Message Created with assignToAgent', statusCode: 201 });
+        try {
+            const messageData: MessageDto = req.body;
+            const accountId: string = req.params.accountid;
+            const getMessageData: MessageInt = await this.messageService.createAssignToAgent(accountId, messageData);
+            res.status(201).json({ data: getMessageData, message: 'Message Created with assignToAgent', statusCode: 201 });
         } catch (error) {
             next(error);
         }
     }
 }
-    
+
 export default MessageController;
