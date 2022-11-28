@@ -24,6 +24,7 @@ import InboxesShiftDetailsRoute from './routes/app/inboxes_shift_details.route';
 import WorkingHoursRoute from './routes/app/working_hours.route';
 import MessageRoute from './routes/app/message.route';
 import ChatAssignRoute from './routes/app/chat_assign.route';
+import SigninSignoutRoute from './routes/app/signinsingout.route';
 
 validateEnv();
 
@@ -55,7 +56,8 @@ const app = new App([
   new InboxesShiftDetailsRoute(),
   new WorkingHoursRoute(),
   new MessageRoute(),
-  new ChatAssignRoute()
+  new ChatAssignRoute(),
+  new SigninSignoutRoute()
 
 ]);
 

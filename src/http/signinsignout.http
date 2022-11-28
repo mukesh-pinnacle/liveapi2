@@ -1,0 +1,31 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@signinsignout=637a372d3263ebe09be8f385
+###
+# Find All Working Hours by account id
+GET {{ baseURL }}/accounts/{{account_id}}/signinsignout
+
+###
+# Find Working Hours By Id
+GET {{ baseURL }}/accounts/{{account_id}}/signinsignout/{{signinsignout}}
+
+###
+# Create Working Hours 
+POST {{ baseURL }}/accounts/{{account_id}}/signinsignout
+Content-Type: application/json
+
+{
+    "user_id":"635ba6239bffd21b730cef13"
+}
+
+
+###
+# Modify Working Hours By Id
+PUT {{ baseURL }}/accounts/{{account_id}}/signinsignout/{{{{signinsignout}}}}
+Content-Type: application/json
+
+{
+    "user_id":"635ba6239bffd21b730cef13"
+}
