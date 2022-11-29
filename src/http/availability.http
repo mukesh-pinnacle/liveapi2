@@ -1,0 +1,23 @@
+# baseURL
+@baseURL = http://localhost:4230/app
+
+@account_id=635ba6239bffd21b730cef13
+@availability=63849a0264b6aea52e73ec81
+###
+# Find All Working Hours by account id
+GET {{ baseURL }}/accounts/{{account_id}}/availability
+
+###
+# Find Working Hours By Id
+GET {{ baseURL }}/accounts/{{account_id}}/availability/{{availability}}
+
+###
+# Create Working Hours 
+POST {{ baseURL }}/accounts/{{account_id}}/availability
+Content-Type: application/json
+
+{
+    "signInSignOut_id":"63847ee64916e3141d5d7c2d",
+    "isAvailable": 1
+}
+
