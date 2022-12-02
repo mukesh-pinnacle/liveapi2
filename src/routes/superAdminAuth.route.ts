@@ -15,7 +15,7 @@ class SuperAdminAuth implements Routes {
   }
 
   private initializeRoutes() {
-    // this.router.post(`${this.path}signup`, validationMiddleware(signInSuperadminDto, 'body'), this.authController.signUp);
+    this.router.post(`${this.path}signup`, this.authController.signUp);
     this.router.post(`${this.path}login`, validationMiddleware(signInSuperadminDto, 'body'), this.authController.logIn);
     this.router.post(`${this.path}logout`, authMiddleware, this.authController.logOut);
   }

@@ -1,4 +1,4 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString } from 'class-validator';
 export class CreateSuperadminDto {
   @IsString()
   public name: string;
@@ -8,4 +8,8 @@ export class CreateSuperadminDto {
   public password: string;
   @IsString()
   public displayname: string;
+  @IsNumber()
+  public is_Active: number;
+  @IsNumber()
+  public is_subsuperAdmin: number;
 }

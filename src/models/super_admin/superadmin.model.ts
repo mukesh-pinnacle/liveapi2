@@ -22,6 +22,11 @@ const superadminSchema: Schema = new Schema({
     type: Number,
     default: 1,
   },
+  is_subsuperAdmin:{
+    type: Number,
+    default: 0,  // if superadmin =0  sub super admin 1
+    required: false,
+  },
   created_at: {
     type: Date,
     required: false,
