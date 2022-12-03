@@ -26,6 +26,7 @@ import MessageRoute from './routes/app/message.route';
 import ChatAssignRoute from './routes/app/chat_assign.route';
 import SigninSignoutRoute from './routes/app/signinsingout.route';
 import AvailabilityRoute from './routes/app/availability.route';
+import subSuperAdmin from './routes/super_admin/subsuperadmin_details.route';
 
 validateEnv();
 
@@ -39,6 +40,7 @@ const app = new App([
   new AccountUserRoute(),
   new LocaleRoute(),
   new RoleRoute(),
+  new subSuperAdmin(),
   // App
   new AuthRoute(),
   new TeamRoute(),

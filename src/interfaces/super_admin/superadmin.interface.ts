@@ -5,7 +5,7 @@ export interface Superadmin {
   password: string;
   displayname: string;
   is_active: number;
-  is_superAdmin: number;
+  is_subsuperAdmin: number;
   created_at: Date;
   updated_at: Date;
 }
