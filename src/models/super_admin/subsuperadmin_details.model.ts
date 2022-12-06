@@ -30,7 +30,6 @@ const subsuperadminDetailsSchema: Schema = new Schema({
         type: Number,
         default: 1,
     },
-    
     expiry_on: {
         type: Date,
         required: false,

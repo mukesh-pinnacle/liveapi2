@@ -4,6 +4,7 @@ import SubSuperAdminDetailsService from '@/services/subsuperadminDetails.service
 //import { SubSuperAdminSetailsDto } from '@/dtos/super_admin/subsuperadmin_details.dto';
 import { CreateSuperadminDto } from '@/dtos/super_admin/superadmin.dto';
 import { CreateSubSuperAdmin } from '@/dtos/super_admin/createSubSuperAdmin.dto';
+import subSuperAdmin from '@/routes/super_admin/subsuperadmin_details.route';
 
 class SubSuperAdminDetailController {
     public subsuperadminDetailsService = new SubSuperAdminDetailsService();
@@ -17,38 +18,37 @@ class SubSuperAdminDetailController {
     //     }
     //   };
 
-    //   public getSuperadminById = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //       const superadminId: string = req.params.id;
-    //       const findOneSuperadminData: Superadmin = await this.superadminService.findSuperadminById(superadminId);
-
-    //       res.status(200).json({ data: findOneSuperadminData, message: 'findOne' });
-    //     } catch (error) {
-    //       next(error);
-    //     }
-    //   };
+      public getDetailsById = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          const superadminId: string = req.params.id;
+          const findOneSuperadminData: SubSuperAdminDetailsInt = await this.subsuperadminDetailsService.findSuperadmindetailById(superadminId);
+          res.status(200).json({ data: findOneSuperadminData, message: 'findOne sub super admin Details' });
+        } catch (error) {
+          next(error);
+        }
+      };
 
     public createSubSuperAdmin = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const subsuperadminData = req.body;
             const createSuperadminData  = await this.subsuperadminDetailsService.createSuperadmin(subsuperadminData);
-            res.status(201).json({ data: createSuperadminData, message: 'created' });
+            res.status(201).json({ data: createSuperadminData, message: 'Sub Super Admin Details created' });
         } catch (error) {
             next(error);
         }
     };
 
-    //   public updateSuperadmin = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //       const superadminId: string = req.params.id;
-    //       const superadminData: CreateSuperadminDto = req.body;
-    //       const updateSuperadminData: Superadmin = await this.superadminService.updateSuperadmin(superadminId, superadminData);
+      public updatesubSuperdetails = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          const superadmindetailId: string = req.params.id;
+          const superadmindetailData: CreateSubSuperAdmin = req.body;
+          const updateSuperadminData: SubSuperAdminDetailsInt = await this.subsuperadminDetailsService.updatesubSuperadmindetail(superadmindetailId, superadmindetailData);
 
-    //       res.status(200).json({ data: updateSuperadminData, message: 'updated' });
-    //     } catch (error) {
-    //       next(error);
-    //     }
-    //   };
+          res.status(200).json({ data: updateSuperadminData, message: 'updated sub super admin details' });
+        } catch (error) {
+          next(error);
+        }
+      };
 
     //   public deleteSuperadmin = async (req: Request, res: Response, next: NextFunction) => {
     //     try {

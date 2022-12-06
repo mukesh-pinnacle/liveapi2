@@ -14,9 +14,7 @@ export class SubSuperAdminSetailsDto {
   public branch: string;
   @IsString()
   public remark: string;
-  @IsDateString()
-  public created_at: Date;
-  public updated_at: Date;
+ 
   @IsString()
   public logo: String;
 }

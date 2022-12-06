@@ -17,11 +17,11 @@ class subSuperAdmin implements Routes {
   private initializeRoutes() {
     // this.router.get(`${this.path}`, [validationMiddleware(SubSuperAdminSetailsDto, 'body'), superadminAuthMiddleware],
     //   this.Controller.getLocale);
-    // this.router.get(`${this.path}/:id`, [validationMiddleware(SubSuperAdminSetailsDto, 'body'), superadminAuthMiddleware],
-    //   this.Controller.getLocaleById);
+    this.router.get(`${this.path}/:id`, [validationMiddleware(SubSuperAdminSetailsDto, 'body'), superadminAuthMiddleware],
+      this.Controller.getDetailsById);
     this.router.post(`${this.path}`, superadminAuthMiddleware, this.Controller.createSubSuperAdmin);
-    // this.router.put(`${this.path}/:id`, [validationMiddleware(SubSuperAdminSetailsDto, 'body', true), superadminAuthMiddleware],
-    //   this.Controller.updateLocale);
+    this.router.put(`${this.path}/:id` , superadminAuthMiddleware,
+      this.Controller.updatesubSuperdetails);
     // this.router.get(`${this.path}/:id/:isActive`, [validationMiddleware(SubSuperAdminSetailsDto, 'body'), superadminAuthMiddleware],
     //   this.Controller.deleteLocale);
   }
