@@ -1,0 +1,48 @@
+# baseURL
+@baseURL = http://localhost:4230
+
+
+###
+# Find User By Id
+GET {{ baseURL }}/subsuperadmin/638ecd9c9375e5dc939f9e98
+
+###
+# Create User
+POST {{ baseURL }}/subsuperadmin
+Content-Type: application/json
+
+{
+    "name":"Saanvi",
+    "displayname":"Saanvi Barapatre",
+    "email":"Saanvi@pinnacle.in",
+    "password":"pass123",
+    "is_subsuperAdmin":0,
+    "company_name": "zeple",
+    "business_description": "Business organization",
+    "logo": "http:\\dummyurl.com",
+    "mobile_no": 8793874346,
+    "is_active":1,
+    "branch": "nagpur",
+    "remark":"business account"
+}
+
+
+###
+# Modify User By Id
+PUT {{ baseURL }}/superadmin/635a068f019d4824aeb165d9
+Content-Type: application/json
+
+{
+    "company_name": "zeple",
+    "business_description": "Business organization",
+    "logo": "http:\\dummyurl.com",
+    "mobile_no": 8793874346,
+    "is_active":1,
+    "branch": "nagpur 2",
+    "remark":"business account 2"
+}
+
+
+###
+# Delete User By Id
+DELETE {{ baseURL }}/superadmin/635a068f019d4824aeb165d9/0

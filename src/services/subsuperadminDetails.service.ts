@@ -74,8 +74,8 @@ class SubSuperAdminDetailsService {
     return updateSuperadmindetailsById;
   }
 
-    public async delete(superadminId: string, isActive: number): Promise<Superadmin> {
-      const deleteSuperadminById: Superadmin = await this.subSuperAdminDetailModel.findByIdAndUpdate(
+    public async delete(superadminId: string, isActive: number): Promise<SubSuperAdminDetailsInt> {
+      const deleteSuperadminById: SubSuperAdminDetailsInt = await this.subSuperAdminDetailModel.findByIdAndUpdate(
         superadminId,
         { $set: { is_active: isActive, expiry_on: Date.now() } },
         { new: true, runValidators: true },
