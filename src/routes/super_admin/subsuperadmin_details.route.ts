@@ -22,8 +22,8 @@ class subSuperAdmin implements Routes {
     this.router.post(`${this.path}`, superadminAuthMiddleware, this.Controller.createSubSuperAdmin);
     this.router.put(`${this.path}/:id` , superadminAuthMiddleware,
       this.Controller.updatesubSuperdetails);
-    // this.router.get(`${this.path}/:id/:isActive`, [validationMiddleware(SubSuperAdminSetailsDto, 'body'), superadminAuthMiddleware],
-    //   this.Controller.deleteLocale);
+    this.router.get(`${this.path}/:id/:isActive`, [validationMiddleware(SubSuperAdminSetailsDto, 'body'), superadminAuthMiddleware],
+      this.Controller.delete);
   }
 }
 

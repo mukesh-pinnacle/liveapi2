@@ -50,17 +50,17 @@ class SubSuperAdminDetailController {
         }
       };
 
-    //   public deleteSuperadmin = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //       const superadminId: string = req.params.id;
-    //       const isActive: number = parseInt(req.params.isActive);
-    //       const deleteSuperadminData: Superadmin = await this.superadminService.deleteSuperadmin(superadminId, isActive);
+      public delete = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          const superadmindetailsId: string = req.params.id;
+          const isActive: number = parseInt(req.params.isActive);
+          const deleteSuperadminData: SubSuperAdminDetailsInt = await this.subsuperadminDetailsService.delete(superadmindetailsId, isActive);
 
-    //       res.status(200).json({ data: deleteSuperadminData, message: 'deleted' });
-    //     } catch (error) {
-    //       next(error);
-    //     }
-    //   };
+          res.status(200).json({ data: deleteSuperadminData, message: 'deleted' });
+        } catch (error) {
+          next(error);
+        }
+      };
 }
 
 export default SubSuperAdminDetailController;

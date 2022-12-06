@@ -74,15 +74,15 @@ class SubSuperAdminDetailsService {
     return updateSuperadmindetailsById;
   }
 
-  //   public async deleteSuperadmin(superadminId: string, isActive: number): Promise<Superadmin> {
-  //     const deleteSuperadminById: Superadmin = await this.superadmin.findByIdAndUpdate(
-  //       superadminId,
-  //       { $set: { is_active: isActive, updated_at: Date.now() } },
-  //       { new: true, runValidators: true },
-  //     );
-  //     if (!deleteSuperadminById) throw new HttpException(409, "Superadmin doesn't exist");
-  //     return deleteSuperadminById;
-  //   }
+    public async delete(superadminId: string, isActive: number): Promise<Superadmin> {
+      const deleteSuperadminById: Superadmin = await this.subSuperAdminDetailModel.findByIdAndUpdate(
+        superadminId,
+        { $set: { is_active: isActive, expiry_on: Date.now() } },
+        { new: true, runValidators: true },
+      );
+      if (!deleteSuperadminById) throw new HttpException(409, "Sub Superadmin details doesn't exist");
+      return deleteSuperadminById;
+    }
 }
 
 export default SubSuperAdminDetailsService;
